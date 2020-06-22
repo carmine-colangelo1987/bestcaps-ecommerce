@@ -12,14 +12,29 @@ body {
   font-size: 1.75em !important;
 }
 
-.product {
-  text-align: center;
+.product-image {
+  max-height: 250px;
+  width: 100%;
+  object-fit: contain;
 }
 
 .reviews {
+  margin: 0.6rem 0 1rem;
+  display: block;
+}
+
+.fas {
+  font-size: 0.9em !important;
+  margin: 1px;
+}
+
+.card-footer {
   display: flex;
   flex-direction: row;
-  margin-bottom: 1rem;
+  justify-content: space-between;
+}
+.card-footer small {
+  max-width: 75px;
 }
 
 /*# sourceMappingURL=style.css.map */
