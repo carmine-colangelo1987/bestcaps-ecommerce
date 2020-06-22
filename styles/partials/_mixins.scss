@@ -1,0 +1,10 @@
+@mixin product {
+    .product{
+        text-align: center;
+    }
+    .reviews{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 1rem;
+    }
+}

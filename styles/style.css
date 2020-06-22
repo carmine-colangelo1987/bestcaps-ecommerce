@@ -8,4 +8,14 @@ body {
   padding: 0;
 }
 
+.product {
+  text-align: center;
+}
+
+.reviews {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+}
+
 /*# sourceMappingURL=style.css.map */
