@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["partials/_styleguide.scss"],"names":[],"mappings":"AAAA;EACI;EACA;;;AAEJ;EACI;EACA","file":"style.css"}
+{"version":3,"sourceRoot":"","sources":["partials/_styleguide.scss","partials/_fontawesome.scss"],"names":[],"mappings":"AAAA;EACI;EACA;;;AAEJ;EACI;EACA;;;ACNJ;EACI","file":"style.css"}
