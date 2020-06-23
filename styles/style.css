@@ -28,6 +28,10 @@ body {
   margin: 1px;
 }
 
+.quantity {
+  margin-bottom: 0.4rem;
+}
+
 .card-footer {
   display: flex;
   flex-direction: row;

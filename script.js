@@ -14,7 +14,7 @@ function data(item){
                 <div class="card-body">
                     <h5 class="card-title title mt-4 text-primary">${item.title}</h5>
                     <p class="card-text text">${item.description}</p>
-                    <p class="card-text"><small class="text-muted pills">Quantità: ${item.quantity}</small></p>
+                    <p class="card-text quantity"><small class="text-muted pills">Quantità: ${item.quantity}</small></p>
                     <p class="card-text"><small class="text-muted days">Durata: ${item.duration} giorni</small></p>
                     <div class="stars">
                         <i class="fas fa-star p-1 text-white bg-primary"></i>
