@@ -39,11 +39,11 @@ function data(item){
     }*/
 }
 
+//array in cui mettere i prodotti selezionati
+let prodottiSelezionati = []
 
-//funzione per iniettare un numero casuale per il conteggio prodotti
-function randomCartNumber() {
-
-    randomNumber = Math.floor(Math.random() * 11);
-    document.getElementById('lblCartCount').innerHTML = `${randomNumber}`;
+//funzione per il numero dei prodotti selezionati
+function productNumber() {
+    document.getElementById('lblCartCount').innerHTML = `${prodottiSelezionati.length}`;
 
 }
