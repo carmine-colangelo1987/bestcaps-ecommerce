@@ -43,24 +43,21 @@ body {
   background-color: #000000;
 }
 
-.fas {
-  font-size: 1.75em !important;
+nav .fas {
+  font-size: 1.75em;
 }
-
-.badge {
+nav .badge {
   padding-left: 9px;
   padding-right: 9px;
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   border-radius: 9px;
 }
-
-.label-warning[href],
-.badge-warning[href] {
+nav .label-warning[href],
+nav .badge-warning[href] {
   background-color: #132E52;
 }
-
-#lblCartCount {
+nav #lblCartCount {
   font-size: 12px;
   background: #04A6B4;
   color: #ffffff;
@@ -94,13 +91,12 @@ body {
   object-fit: contain;
 }
 
-.reviews {
+.stars {
   margin: 0.6rem 0 1rem;
-  display: block;
 }
 
-.fas {
-  font-size: 0.9em !important;
+.fas.fa-star {
+  font-size: 0.9em;
   margin: 1px;
 }
 
@@ -115,6 +111,45 @@ body {
 }
 .card-footer small {
   max-width: 75px;
+  color: #6986B9 !important;
+}
+
+.trolley {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.trolley-number {
+  background-color: #ffffff;
+  border: 1px solid #6986B9;
+  height: 100%;
+  width: 35px;
+}
+
+.trolley-add {
+  background-color: #ffffff;
+  color: #6986B9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 2px;
+  border-top: 1px solid #6986B9;
+  border-bottom: 1px solid #6986B9;
+}
+
+.trolley-icon {
+  background-color: #132E52;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.trolley-icon .fa-shopping-cart {
+  color: #ffffff;
+  font-size: 1rem;
+  padding: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */

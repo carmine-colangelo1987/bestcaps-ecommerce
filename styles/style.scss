@@ -1,7 +1,6 @@
 @import 'partials/variables';
 @import 'partials/mixins';
 @import 'partials/styleguide';
-@import 'partials/fontawesome';
-@import 'partials/shoppincart';
 
+@include nav;
 @include list-product;

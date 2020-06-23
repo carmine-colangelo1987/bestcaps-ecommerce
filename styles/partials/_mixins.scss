@@ -1,3 +1,31 @@
+@mixin nav{
+    nav{
+        .fas {
+            font-size: 1.75em;
+        }
+        .badge {
+            padding-left: 9px;
+            padding-right: 9px;
+            -webkit-border-radius: 9px;
+            -moz-border-radius: 9px;
+            border-radius: 9px;
+        }
+        
+        .label-warning[href],
+        .badge-warning[href] {
+            background-color: $second-color;
+        }
+        #lblCartCount {
+            font-size: 12px;
+            background: $first-color;
+            color: $fourth-color;
+            padding: 0 5px;
+            vertical-align: top;
+            margin-left: -10px; 
+        }
+    }    
+}
+
 @mixin list-product {
     .category{
         display: flex;
@@ -21,12 +49,11 @@
         width: 100%;
         object-fit: contain;
     }
-    .reviews{
+    .stars{
         margin: .6rem 0 1rem;
-        display: block;
     }
-    .fas{
-        font-size: .9em !important;
+    .fas.fa-star{
+        font-size: .9em;
         margin: 1px;
     }
     .quantity{
@@ -38,6 +65,41 @@
         justify-content: space-between;
         small{
             max-width: 75px;
+            color: $third-color!important;
+        }
+    }
+    .trolley{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .trolley-number{
+        background-color: $fourth-color;
+        border: 1px solid $third-color;
+        height: 100%;
+        width: 35px;
+    }
+    .trolley-add{
+        background-color: $fourth-color;
+        color: $third-color;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        padding: 2px;
+        border-top: 1px solid $third-color;
+        border-bottom: 1px solid $third-color;
+    }
+    .trolley-icon{
+        background-color: $second-color;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .fa-shopping-cart{            
+            color: $fourth-color;
+            font-size: 1rem; 
+            padding: 10px;
         }
     }
 }
