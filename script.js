@@ -12,7 +12,7 @@ function data(item){
             <div class="card">
                 <img src="imgs/${item.img}.jpg" class="card-img-top product-image" alt="ph-sport pills">
                 <div class="card-body">
-                    <h5 class="card-title title mt-4 text-primary">${item.title}</h5>
+                    <h5 class="card-title title mt-4 first-color">${item.title}</h5>
                     <p class="card-text text">${item.description}</p>
                     <p class="card-text quantity"><small class="text-muted pills">Quantità: ${item.quantity}</small></p>
                     <p class="card-text"><small class="text-muted days">Durata: ${item.duration} giorni</small></p>
