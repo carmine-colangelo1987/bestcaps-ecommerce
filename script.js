@@ -23,24 +23,26 @@ function init(object){
     function createListName(item){
         let listItem = `
         <div class="category mt-5 text-center"><span class="line first-color-bg"></span><h3 class="first-color">${item}</h3><span class="line first-color-bg"></span></div>
-        <div class="cards-wrapper row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+        <div id="${item}" class="cards-wrapper row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
 
         </div>`
         document.querySelector('.list-item').innerHTML += listItem;
-        }
     }
+
+    console.log(Object.values(object))
+    Object.values(object).forEach(i => createCards(i));
+    
     debugger
-    Object.values(object).forEach(item => data(item));
-    function data(item){
-        let itemDuration = item.dose * item.capsule;
+    function createCards(i){
+        let itemDuration = i.dose * i.capsule;
         let productCard = `        
             <div class="col mb-4 product text-center mt-5">
                 <div class="card">
                     <img src="imgs/ph-sport.jpg" class="card-img-top product-image" alt="ph-sport pills">
                     <div class="card-body">
-                        <h5 class="card-title title mt-4 first-color">${item.nome}</h5>
+                        <h5 class="card-title title mt-4 first-color">${i.nome}</h5>
                         <p class="card-text text">Questo prodotto è ottimo per allenarsi</p>
-                        <p class="card-text quantity"><small class="text-muted pills">Quantità: ${item.capsule} pills</small></p>
+                        <p class="card-text quantity"><small class="text-muted pills">Quantità: ${i.capsule} pills</small></p>
                         <p class="card-text"><small class="text-muted days">Dose giornaliera: ${itemDuration} giorni</small></p>
                         <div class="stars">
                             <i class="fas fa-star p-1 text-white first-color-bg"></i>
@@ -50,7 +52,7 @@ function init(object){
                             <i class="fas fa-star p-1 text-white first-color-bg"></i>
                         </div>
                         <small class="reviews">Very good product!</small>
-                        <h5 class="card-title price second-color">${item.prezzo} €</h5>                    
+                        <h5 class="card-title price second-color">${i.prezzo} €</h5>                    
                     </div>
                     <div class="card-footer card-footer-product">
                         <small class="text-muted pr-3">Aggiungi al carrello</small>
@@ -65,7 +67,7 @@ function init(object){
             document.querySelector('.stars').innerHTML += stars; 
         }*/
     }
-
+}
 
 
 //array in cui mettere i prodotti selezionati
