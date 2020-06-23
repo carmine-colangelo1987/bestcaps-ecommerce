@@ -69,7 +69,7 @@ function init(object){
 
 
 //array in cui mettere i prodotti selezionati
-let prodottiSelezionati = ['', '']
+let productSelected = ['prova', 'prova']
 
 /*
 funzione per il numero dei prodotti selezionati da visualizzare sull'icona del carrello
@@ -78,5 +78,5 @@ probabilmente andrà inserita all'interno della funzione che verrà richiamata a
 nell'icona
 */
 function productNumber() {
-    document.getElementById('lblCartCount').innerHTML = `${prodottiSelezionati.length}`;
+    document.getElementById('lblCartCount').innerHTML = `${productSelected.length}`;
 }
