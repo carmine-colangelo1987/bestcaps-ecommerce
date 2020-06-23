@@ -64,7 +64,7 @@ function productCard(item){
                         <small class="text-muted pr-3">Aggiungi al carrello</small>
                         <div class="trolley">
                             <div class="trolley-number"></div>
-                            <div class="trolley-add"><i class="fas fa-plus-square"></i><i class="fas fa-minus-square"></i></div>
+                            <div class="trolley-add"><i class="fas fa-plus-square" onclick="add()"></i><i class="fas fa-minus-square"></i></div>
                             <div class="trolley-icon"><i class="fas fa-shopping-cart" aria-hidden="true"></i></div>
                         </div>
                     </div>
