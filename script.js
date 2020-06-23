@@ -38,3 +38,12 @@ function data(item){
         document.querySelector('.stars').innerHTML += stars; 
     }*/
 }
+
+
+//funzione per iniettare un numero casuale per il conteggio prodotti
+function randomCartNumber() {
+
+    randomNumber = Math.floor(Math.random() * 11);
+    document.getElementById('lblCartCount').innerHTML = `${randomNumber}`;
+
+}
