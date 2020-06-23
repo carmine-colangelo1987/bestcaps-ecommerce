@@ -1,3 +1,4 @@
+//Chiamata
 fetch('https://my-json-server.typicode.com/sarhita92/catalogue/db').then(result => {
     console.dir(result)
     if(result.ok){
@@ -18,13 +19,15 @@ fetch('https://my-json-server.typicode.com/sarhita92/catalogue/db').then(result 
 });
 
 function init(object){
-    for (i=0; Object.keys(object).length; i++){
+    Object.keys(object).forEach(item => createListName(item));
+    function createListName(item){
         let listItem = `
-        <div class="category mt-5 text-center"><span class="line first-color-bg"></span><h3 class="first-color">Esempio</h3><span class="line first-color-bg"></span></div>
+        <div class="category mt-5 text-center"><span class="line first-color-bg"></span><h3 class="first-color">${item}</h3><span class="line first-color-bg"></span></div>
         <div class="cards-wrapper row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
 
         </div>`
         document.querySelector('.list-item').innerHTML += listItem;
+        }
     }
     debugger
     Object.values(object).forEach(item => data(item));
@@ -62,7 +65,7 @@ function init(object){
             document.querySelector('.stars').innerHTML += stars; 
         }*/
     }
-}
+
 
 
 //array in cui mettere i prodotti selezionati
