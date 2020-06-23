@@ -11,35 +11,35 @@ body {
 .first-color {
   color: #04A6B4;
 }
-.first-color:-bg {
+.first-color-bg {
   background-color: #04A6B4;
 }
 
 .second-color {
   color: #132E52;
 }
-.second-color:-bg {
+.second-color-bg {
   background-color: #132E52;
 }
 
 .third-color {
   color: #6986B9;
 }
-.third-color:-bg {
+.third-color-bg {
   background-color: #6986B9;
 }
 
 .fourth-color {
   color: #ffffff;
 }
-.fourth-color:-bg {
+.fourth-color-bg {
   background-color: #ffffff;
 }
 
 .fifth-color {
   color: #000000;
 }
-.fifth-color:-bg {
+.fifth-color-bg {
   background-color: #000000;
 }
 
