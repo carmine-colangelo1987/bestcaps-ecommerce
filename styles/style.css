@@ -12,6 +12,28 @@ body {
   font-size: 1.75em !important;
 }
 
+.badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #132E52;
+}
+
+#lblCartCount {
+  font-size: 12px;
+  background: #04A6B4;
+  color: #ffffff;
+  padding: 0 5px;
+  vertical-align: top;
+  margin-left: -10px;
+}
+
 .product-image {
   max-height: 250px;
   width: 100%;
