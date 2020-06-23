@@ -112,6 +112,15 @@ nav #lblCartCount {
 .card-footer small {
   max-width: 75px;
   color: #6986B9 !important;
+  cursor: pointer;
+  padding-right: 0.3rem !important;
+}
+.card-footer small:hover {
+  color: #4c6ca3 !important;
+  font-weight: 900;
+}
+.card-footer small:active {
+  color: #132E52 !important;
 }
 
 .trolley {
@@ -137,6 +146,13 @@ nav #lblCartCount {
   padding: 2px;
   border-top: 1px solid #6986B9;
   border-bottom: 1px solid #6986B9;
+  cursor: pointer;
+}
+.trolley-add .fas:hover {
+  color: #3c5580;
+}
+.trolley-add .fas:active {
+  color: #132E52;
 }
 
 .trolley-icon {

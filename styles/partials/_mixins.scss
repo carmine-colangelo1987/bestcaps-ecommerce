@@ -66,6 +66,15 @@
         small{
             max-width: 75px;
             color: $third-color!important;
+            cursor: pointer;
+            padding-right: .3rem!important;
+            &:hover{
+                color: darken($third-color, 10%)!important; 
+                font-weight: 900;             
+            }
+            &:active{
+                color: $second-color!important;
+            }
         }
     }
     .trolley{
@@ -89,6 +98,15 @@
         padding: 2px;
         border-top: 1px solid $third-color;
         border-bottom: 1px solid $third-color;
+        cursor: pointer;
+        .fas{
+            &:hover{
+                color: darken($third-color, 20%);                
+            }
+            &:active{
+                color: $second-color;
+            }
+        }
     }
     .trolley-icon{
         background-color: $second-color;
