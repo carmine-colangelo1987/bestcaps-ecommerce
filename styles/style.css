@@ -8,6 +8,26 @@ body {
   padding: 0;
 }
 
+.first-color {
+  color: #04A6B4;
+}
+
+.second-color {
+  color: #132E52;
+}
+
+.third-color {
+  color: #6986B9;
+}
+
+.fourth-color {
+  color: #ffffff;
+}
+
+.fifth-color {
+  color: #000000;
+}
+
 .fas {
   font-size: 1.75em !important;
 }
