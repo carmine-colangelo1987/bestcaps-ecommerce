@@ -73,6 +73,9 @@ body {
   display: flex;
   align-items: center;
 }
+.category h3 {
+  width: 100%;
+}
 
 .line {
   height: 2px;

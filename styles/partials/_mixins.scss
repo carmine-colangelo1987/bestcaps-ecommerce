@@ -2,6 +2,9 @@
     .category{
         display: flex;
         align-items: center;
+        h3{
+            width: 100%;
+        }
     }
     .line{
         height: 2px;
