@@ -69,6 +69,22 @@ body {
   margin-left: -10px;
 }
 
+.category {
+  display: flex;
+  align-items: center;
+}
+
+.line {
+  height: 2px;
+  width: 100%;
+}
+.line:first-child {
+  margin-right: 10px;
+}
+.line:last-child {
+  margin-left: 10px;
+}
+
 .product-image {
   max-height: 250px;
   width: 100%;

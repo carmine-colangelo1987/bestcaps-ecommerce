@@ -1,4 +1,18 @@
-@mixin product {
+@mixin list-product {
+    .category{
+        display: flex;
+        align-items: center;
+    }
+    .line{
+        height: 2px;
+        width: 100%;
+        &:first-child{
+            margin-right: 10px;
+        }
+        &:last-child{
+            margin-left: 10px;
+        }
+    }
     .product-image{
         max-height: 250px;
         width: 100%;
