@@ -43,6 +43,10 @@ body {
   background-color: #000000;
 }
 
+nav {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 nav .fas {
   font-size: 1.75em;
 }

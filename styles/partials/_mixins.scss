@@ -1,5 +1,8 @@
 @mixin nav{
     nav{
+        padding-left: 0!important;
+        padding-right: 0!important;  
+
         .fas {
             font-size: 1.75em;
         }

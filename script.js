@@ -83,20 +83,6 @@ function createStar(s){
     return star;
 }
 
-
-
-//productStars(item[x].rating);
-/*function productStars(item){
-    let y
-    let productStar = ''
-    for (y=0; y<item.length; y++) {
-        productStar +=`        
-        <i class="fas fa-star p-1 text-white first-color-bg"></i>
-        `
-    }
-    return productStar;
-}*/
-
 //array in cui mettere i prodotti selezionati
 let productSelected = ['prova', 'prova']
 
