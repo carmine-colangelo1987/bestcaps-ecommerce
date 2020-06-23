@@ -64,3 +64,16 @@ function init(object){
     }
 }
 
+
+//array in cui mettere i prodotti selezionati
+let prodottiSelezionati = ['', '']
+
+/*
+funzione per il numero dei prodotti selezionati da visualizzare sull'icona del carrello
+probabilmente andrà inserita all'interno della funzione che verrà richiamata al click del pulsante
+"aggiungi al carrello" del singolo prodotto, così da aggiornare di volta in volta il numero totale
+nell'icona
+*/
+function productNumber() {
+    document.getElementById('lblCartCount').innerHTML = `${prodottiSelezionati.length}`;
+}
