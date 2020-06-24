@@ -69,15 +69,7 @@
         small{
             max-width: 75px;
             color: $third-color!important;
-            cursor: pointer;
-            padding-right: .3rem!important;
-            &:hover{
-                color: darken($third-color, 10%)!important; 
-                font-weight: 900;             
-            }
-            &:active{
-                color: $second-color!important;
-            }
+            padding-right: .8rem!important;
         }
     }
     .trolley{
@@ -90,6 +82,10 @@
         border: 1px solid $third-color;
         height: 100%;
         width: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 0rem;
     }
     .trolley-add{
         background-color: $fourth-color;
@@ -117,6 +113,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
+        &:hover{
+            background-color: darken($third-color, 10%);         
+        }
+        &:active{
+            background-color: $third-color; 
+        }
         .fa-shopping-cart{            
             color: $fourth-color;
             font-size: 1rem; 
