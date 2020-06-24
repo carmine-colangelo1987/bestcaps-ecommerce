@@ -43,7 +43,7 @@ function productCard(item){
     for (x=0; x<Object.values(item).length; x++) {
         let n = item[x].prezzo.toString();
         
-        let price = n.substring(0, 2) + ',' + n.substr(-3);
+        //let price = n.substring(0, 2) + ',' + n.substr(-3);
         productCard +=`        
             <div class="col mb-4 product text-center mt-5">
                 <div class="card">
