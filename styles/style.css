@@ -43,6 +43,10 @@ body {
   background-color: #000000;
 }
 
+.bg-color {
+  background-color: #e6e6e7;
+}
+
 nav {
   padding-left: 0 !important;
   padding-right: 0 !important;
@@ -173,6 +177,44 @@ nav #lblCartCount {
   color: #ffffff;
   font-size: 1rem;
   padding: 10px;
+}
+
+h2 {
+  width: 100%;
+}
+
+.trolley-wrapper {
+  margin: 50px 0;
+  padding: 30px;
+}
+.trolley-wrapper img {
+  max-width: 300px;
+}
+.trolley-wrapper .trolley {
+  margin: 20px;
+  height: 37px;
+  width: min-content;
+}
+.trolley-wrapper .trolley-add {
+  border-right: 1px solid #6986B9;
+}
+
+.trolley-products {
+  padding-top: 15px;
+  margin-right: 45px;
+}
+
+.trolley-products, .trolley-tot {
+  border-radius: 5px;
+}
+
+.trolley-align {
+  display: flex;
+  align-items: center;
+}
+
+.trolley-tot {
+  padding: 15px;
 }
 
 /*# sourceMappingURL=style.css.map */

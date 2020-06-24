@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    
+    <!-- CSS personalizzato -->
+    <link rel="stylesheet" href="styles/style.css">
+    
+    <!-- FontAwesome Kit -->
+    <script src="https://kit.fontawesome.com/f928200c50.js" crossorigin="anonymous"></script>
+
+    <!-- JS personalizzato -->
+    <script src="script.js" defer></script>
+
+</head>
+
+<body class="container">
+
+    <!-- Header -->
+    <nav class="navbar navbar-light">
+        <a class="navbar-brand" href="index.html">
+            <img src="img/logo.svg" width="150" height="50" class="d-inline-block align-top" alt=""></a>
+        <div class="navbar-nav ml-auto flex-row">
+            <a href="#" class="nav-item nav-link active px-2"><i class="fas fa-user"></i></a>
+            <a href="#" class="nav-item nav-link active px-2"><i class="fas fa-heart"></i></a>
+            <a href="trolley.html" class="nav-item nav-link active px-2">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge badge-warning" id="lblCartCount">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- List Item -->
+    <div class="trolley-page">
+        <div class="category mt-5 text-center"><span class="line first-color-bg"></span><h2 class="first-color">Il Mio Carrello</h2><span class="line first-color-bg"></span></div>
+        <div class="trolley-wrapper bg-color row">
+            <div class="col-lg-7 fourth-color-bg trolley-products">
+
+                <div class="card card-trolley mb-3">
+                    <div class="trolley-align row no-gutters">
+                        <div class="col-md-4">
+                            <img src="imgs/ph-sport.jpg" class="card-img" alt="product">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row no-gutters">
+                                <div class="trolley-card-body col-md-9">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Descriptiom</p>
+                                        <p class="card-text quantity"><small class="text-muted pills">Quantità: 200 pills</small></p>
+                                        <p class="card-text"><small class="text-muted days">Durata: 100 giorni</small></p>
+                                        <h5 class="card-title price second-color">12,30 </h5>   
+                                    </div>                 
+                                </div>
+                                <div class="how-many col-md-1">
+                                    <div class="trolley">
+                                        <div class="trolley-number"></div>
+                                        <div class="trolley-add"><i class="fas fa-plus-square" onclick="add()"></i><i class="fas fa-minus-square"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-trolley mb-3">
+                    <div class="trolley-align row no-gutters">
+                        <div class="col-md-4">
+                            <img src="imgs/ph-sport.jpg" class="card-img" alt="product">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row no-gutters">
+                                <div class="trolley-card-body col-md-9">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Descriptiom</p>
+                                        <p class="card-text quantity"><small class="text-muted pills">Quantità: 200 pills</small></p>
+                                        <p class="card-text"><small class="text-muted days">Durata: 100 giorni</small></p>
+                                        <h5 class="card-title price second-color">12,30 </h5>   
+                                    </div>                 
+                                </div>
+                                <div class="how-many col-md-1">
+                                    <div class="trolley">
+                                        <div class="trolley-number"></div>
+                                        <div class="trolley-add"><i class="fas fa-plus-square" onclick="add()"></i><i class="fas fa-minus-square"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>            
+            <div class="col-sm-8 col-lg-4 fourth-color-bg trolley-tot mt-4 mt-md-0"></div>
+        </div>
+    </div>
+</body>
+</html>

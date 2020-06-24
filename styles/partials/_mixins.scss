@@ -127,3 +127,38 @@
         }
     }
 }
+
+@mixin trolley{
+    h2{
+        width: 100%;
+    }
+    .trolley-wrapper{
+        margin: 50px 0;
+        padding: 30px;
+        img{
+            max-width: 300px;
+        }
+        .trolley{
+            margin: 20px;
+            height: 37px;
+            width: min-content;
+        }
+        .trolley-add{            
+            border-right: 1px solid $third-color;
+        }
+    }
+    .trolley-products{
+        padding-top: 15px;             
+        margin-right: 45px;
+    }
+    .trolley-products, .trolley-tot{
+        border-radius: 5px;
+    }
+    .trolley-align{
+        display: flex;
+        align-items: center;
+    }
+    .trolley-tot{
+        padding: 15px;   
+    }
+}
