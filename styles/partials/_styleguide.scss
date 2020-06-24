@@ -1,0 +1,38 @@
+html {
+    padding: 0;
+    margin: 0;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+.first-color{
+    color:$first-color;
+    &-bg{
+        background-color: $first-color;
+    }
+}
+.second-color{
+    color:$second-color;
+    &-bg{
+        background-color: $second-color;
+    }
+}
+.third-color{
+    color:$third-color;
+    &-bg{
+        background-color: $third-color;
+    }
+}
+.fourth-color{
+    color:$fourth-color;
+    &-bg{
+        background-color: $fourth-color;
+    }
+}
+.fifth-color{
+    color:$fifth-color;
+    &-bg{
+        background-color: $fifth-color;
+    }
+}
