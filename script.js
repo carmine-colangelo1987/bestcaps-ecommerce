@@ -41,9 +41,7 @@ function productCard(item){
     let x
     let productCard = ''
     for (x=0; x<Object.values(item).length; x++) {
-        let n = item[x].prezzo.toString();
-        
-        //let price = n.substring(0, 2) + ',' + n.substr(-3);
+        let n = item[x].prezzo / 1000;
         productCard +=`        
             <div class="col mb-4 product text-center mt-5">
                 <div class="card">
@@ -58,7 +56,7 @@ function productCard(item){
                         createStar(item[x].rating)
                         +
                         `</div>
-                        <h5 class="card-title price second-color">${price} €</h5>                    
+                        <h5 class="card-title price second-color">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR'}).format(n)}</h5>                    
                     </div>
                     <div class="card-footer card-footer-product">
                         <small class="text-muted pr-3">Aggiungi al carrello</small>
