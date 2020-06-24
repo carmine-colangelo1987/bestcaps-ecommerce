@@ -40,17 +40,19 @@ function init(object){
 var numbersProduct = [];
 
 //funzione che aggiunge +1 al numero totale del prodotto
-function add(id,x) {
-    let addOne = numbersProduct[x] + 1;
-    numbersProduct[x] = addOne;
+function add(id) {
+    let index = numbersProduct.findIndex(product => product.prodId === id);
+    let addOne = numbersProduct[index].counter + 1;
+    numbersProduct[index].counter = addOne;
     document.getElementById(id).innerHTML = addOne;
 }
 
 //funzione che toglie -1 al numero totale del prodotto fino ad arrivare a 0
-function minus(id,x) {
-    if (numbersProduct[x] > 0) {
-    let minOne = numbersProduct[x] - 1;
-    numbersProduct[x] = minOne;
+function minus(id) {
+    let index = numbersProduct.findIndex(product => product.prodId === id);
+    if (numbersProduct[index].counter > 0) {
+    let minOne = numbersProduct[index].counter - 1;
+    numbersProduct[index].counter = minOne;
     document.getElementById(id).innerHTML = minOne;
     }
 }
@@ -60,14 +62,15 @@ function productCard(item){
     let productCard = ''
     
     for (x=0; x<Object.values(item).length; x++) {
-        //crea i singoli elmenti dell'array per fare i singoli counter dei prodotti
-        numbersProduct[x] = 0;
-
         //formatta il prezzo json in un formato utile
         let n = item[x].prezzo / 1000;
 
         //crea un id univoco per ogni singolo prodotto
         let currentProdId = item[x].nome.replace(/\./g,'').replace(/ /g,'')+item[x].id;
+
+        //crea i singoli elmenti dell'array per fare i singoli counter dei prodotti
+        let productObject = {prodId : currentProdId, counter: 0};
+        numbersProduct.push(productObject)
 
         productCard +=`        
             <div class="col mb-4 product text-center mt-5">
@@ -88,8 +91,8 @@ function productCard(item){
                     <div class="card-footer card-footer-product">
                         <small class="text-muted pr-3">Aggiungi al carrello</small>
                         <div class="trolley">
-                            <div class="trolley-number" id="${currentProdId}">${numbersProduct[x]}</div>
-                            <div class="trolley-add"><i class="fas fa-plus-square" onclick="add('`+currentProdId+`',${x})"></i><i class="fas fa-minus-square" onclick="minus('`+currentProdId+`',${x})"></i></div>
+                            <div class="trolley-number" id="${currentProdId}">0</div>
+                            <div class="trolley-add"><i class="fas fa-plus-square" onclick="add('`+currentProdId+`')"></i><i class="fas fa-minus-square" onclick="minus('`+currentProdId+`')"></i></div>
                             <div class="trolley-icon"><i class="fas fa-shopping-cart" aria-hidden="true"></i></div>
                         </div>
                     </div>
