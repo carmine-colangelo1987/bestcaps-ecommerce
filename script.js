@@ -36,12 +36,39 @@ function init(object){
     }
 }
 
+//crea un array composto dal numero totale dei singoli prodotti
+var numbersProduct = [];
+
+//funzione che aggiunge +1 al numero totale del prodotto
+function add(id,x) {
+    let addOne = numbersProduct[x] + 1;
+    numbersProduct[x] = addOne;
+    document.getElementById(id).innerHTML = addOne;
+}
+
+//funzione che toglie -1 al numero totale del prodotto fino ad arrivare a 0
+function minus(id,x) {
+    if (numbersProduct[x] > 0) {
+    let minOne = numbersProduct[x] - 1;
+    numbersProduct[x] = minOne;
+    document.getElementById(id).innerHTML = minOne;
+    }
+}
 
 function productCard(item){
     let x
     let productCard = ''
+    
     for (x=0; x<Object.values(item).length; x++) {
+        //crea i singoli elmenti dell'array per fare i singoli counter dei prodotti
+        numbersProduct[x] = 0;
+
+        //formatta il prezzo json in un formato utile
         let n = item[x].prezzo / 1000;
+
+        //crea un id univoco per ogni singolo prodotto
+        let currentProdId = item[x].nome.replace(/\./g,'').replace(/ /g,'')+item[x].id;
+
         productCard +=`        
             <div class="col mb-4 product text-center mt-5">
                 <div class="card">
@@ -61,8 +88,8 @@ function productCard(item){
                     <div class="card-footer card-footer-product">
                         <small class="text-muted pr-3">Aggiungi al carrello</small>
                         <div class="trolley">
-                            <div class="trolley-number"></div>
-                            <div class="trolley-add"><i class="fas fa-plus-square" onclick="add()"></i><i class="fas fa-minus-square"></i></div>
+                            <div class="trolley-number" id="${currentProdId}">${numbersProduct[x]}</div>
+                            <div class="trolley-add"><i class="fas fa-plus-square" onclick="add('`+currentProdId+`',${x})"></i><i class="fas fa-minus-square" onclick="minus('`+currentProdId+`',${x})"></i></div>
                             <div class="trolley-icon"><i class="fas fa-shopping-cart" aria-hidden="true"></i></div>
                         </div>
                     </div>
@@ -72,6 +99,7 @@ function productCard(item){
     }
     return productCard;
 }
+
 
 function createStar(s){
     let star = ''
@@ -93,3 +121,11 @@ nell'icona
 function productNumber() {
     document.getElementById('lblCartCount').innerHTML = `${productSelected.length}`;
 }
+
+/*
+numbers = [{a:175}, {a:50}, {a:25}];
+
+numbers.map(x => x.a).reduce((total, num) => {
+    return total + num;
+});
+*/
