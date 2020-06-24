@@ -116,15 +116,7 @@ nav #lblCartCount {
 .card-footer small {
   max-width: 75px;
   color: #6986B9 !important;
-  cursor: pointer;
-  padding-right: 0.3rem !important;
-}
-.card-footer small:hover {
-  color: #4c6ca3 !important;
-  font-weight: 900;
-}
-.card-footer small:active {
-  color: #132E52 !important;
+  padding-right: 0.8rem !important;
 }
 
 .trolley {
@@ -138,6 +130,10 @@ nav #lblCartCount {
   border: 1px solid #6986B9;
   height: 100%;
   width: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0rem;
 }
 
 .trolley-add {
@@ -165,6 +161,13 @@ nav #lblCartCount {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+.trolley-icon:hover {
+  background-color: #4c6ca3;
+}
+.trolley-icon:active {
+  background-color: #6986B9;
 }
 .trolley-icon .fa-shopping-cart {
   color: #ffffff;
