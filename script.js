@@ -63,12 +63,12 @@ function productCard(item){
                     <div class="card-footer card-footer-product">
                         <small class="text-left pr-3 pl-1">Aggiungi al carrello</small>
                         <div class="trolley">
-                            <div class="trolley-quantity">
+                            <div class="trolley-quantity fourth-color-bg">
                                 <input type="number" name="number" min="0" max="1000" value="0" class="trolley-number">
                                 <i class="fas fa-plus-square plus third-color" onclick="this.parentNode.querySelector('[type=number]').stepUp();"></i>
                                 <i class="fas fa-minus-square minus third-color" onclick="this.parentNode.querySelector('[type=number]').stepDown();"></i>
                             </div>
-                            <div class="trolley-icon"><i class="fas fa-shopping-cart" aria-hidden="true"></i></div>
+                            <div class="trolley-icon second-color-bg"><i class="fas fa-shopping-cart" aria-hidden="true"></i></div>
                         </div>
                     </div>
                 </div>
