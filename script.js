@@ -128,7 +128,7 @@ function productCard(item){
     }
     return productCard;
 
-    /*ù
+    /*
                             onclick="this.parentNode.querySelector('[type=number]').stepUp();"
                             onclick="this.parentNode.querySelector('[type=number]').stepDown();"
                             <div class="trolley-number d-flex align-items-center justify-content-center" id="${currentProdId}"></div>
