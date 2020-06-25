@@ -53,6 +53,7 @@ nav {
 }
 nav .fas {
   font-size: 1.3em;
+  transition: 1s;
 }
 @media (min-width: 576px) {
   nav .fas {
