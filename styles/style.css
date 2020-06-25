@@ -52,7 +52,12 @@ nav {
   padding-right: 0 !important;
 }
 nav .fas {
-  font-size: 1.75em;
+  font-size: 1.3em;
+}
+@media (min-width: 576px) {
+  nav .fas {
+    font-size: 1.75em;
+  }
 }
 nav .badge {
   padding-left: 9px;
