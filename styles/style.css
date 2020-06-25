@@ -133,13 +133,13 @@ nav #lblCartCount {
 
 .trolley-quantity {
   border: 1px solid #6986B9;
-  background-color: #ffffff;
   position: relative;
 }
 .trolley-quantity .fas {
   font-size: 1.2rem;
   position: absolute;
   z-index: 2;
+  cursor: pointer;
 }
 .trolley-quantity .fas:hover {
   color: #3c5580;
@@ -166,7 +166,6 @@ nav #lblCartCount {
 }
 
 .trolley-number {
-  background-color: #ffffff;
   color: #132E52;
   border: none;
   padding: 9px;
@@ -187,7 +186,6 @@ nav #lblCartCount {
 }
 
 .trolley-icon {
-  background-color: #132E52;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -204,6 +202,16 @@ nav #lblCartCount {
   color: #ffffff;
   font-size: 1rem;
   padding: 12.7px;
+}
+
+.remove {
+  cursor: pointer;
+}
+.remove:hover {
+  color: #037882;
+}
+.remove:active {
+  color: #132E52;
 }
 
 h2 {
@@ -226,17 +234,44 @@ h2 {
   border-right: 1px solid #6986B9;
 }
 
-.trolley-products, .trolley-tot {
-  border-radius: 5px;
-}
-
 .trolley-align {
   display: flex;
   align-items: center;
 }
 
 .trolley-tot {
-  padding: 15px;
+  padding-top: 8px;
+  margin-top: 8px;
+  border-top: 2px solid #04A6B4;
+}
+
+.general-wrapper {
+  position: relative;
+}
+
+.remove-product {
+  position: absolute;
+  bottom: 0;
+  right: 15px;
+  z-index: 6;
+  cursor: pointer;
+}
+.remove-product:hover {
+  color: #037882;
+}
+.remove-product:active {
+  color: #04A6B4;
+}
+
+.go-to-pay {
+  border: none;
+}
+.go-to-pay:hover {
+  background-color: #0498a5;
+}
+.go-to-pay:active {
+  border: none;
+  background-color: #132E52;
 }
 
 /*# sourceMappingURL=style.css.map */

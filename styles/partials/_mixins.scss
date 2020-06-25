@@ -81,12 +81,12 @@
     }
     .trolley-quantity{
         border: 1px solid $third-color;
-        background-color: $fourth-color;
         position: relative;
         .fas{
             font-size: 1.2rem;
             position: absolute;
             z-index: 2;
+            cursor: pointer;
             &:hover{
                 color: darken($third-color, 20%);                
             }
@@ -113,7 +113,6 @@
         }
     }
     .trolley-number{
-        background-color: $fourth-color;
         color: $second-color;
         border: none;
         padding: 9px;
@@ -134,7 +133,6 @@
         }
     }
     .trolley-icon{
-        background-color: $second-color;
         height: 100%;
         display: flex;
         justify-content: center;
@@ -155,6 +153,15 @@
 }
 
 @mixin trolley{
+    .remove{
+        cursor: pointer;
+        &:hover{
+            color: darken($first-color, 10%);
+        }
+        &:active{
+            color: $second-color;
+        }
+    }
     h2{
         width: 100%;
     }
@@ -173,14 +180,39 @@
             border-right: 1px solid $third-color;
         }
     }
-    .trolley-products, .trolley-tot{
-        border-radius: 5px;
-    }
     .trolley-align{
         display: flex;
         align-items: center;
     }
     .trolley-tot{
-        padding: 15px;   
+        padding-top: 8px;
+        margin-top: 8px; 
+        border-top: 2px solid $first-color;  
+    }
+    .general-wrapper{
+        position: relative;
+    }    
+    .remove-product{
+        position: absolute;
+        bottom: 0;
+        right: 15px;
+        z-index: 6;
+        cursor: pointer;
+        &:hover{
+            color: darken($first-color, 10%);
+        }
+        &:active{
+            color: $first-color;
+        }
+    }
+    .go-to-pay{
+        border: none;
+        &:hover{
+            background-color: darken($first-color, 3%);
+        }
+        &:active{
+            border: none;
+            background-color: $second-color;
+        }
     }
 }

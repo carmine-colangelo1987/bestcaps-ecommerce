@@ -112,7 +112,7 @@ function productCard(item){
                     </div>
                     <div class="card-footer card-footer-product">
                         <small class="text-left pr-3 pl-1">Aggiungi al carrello</small>
-                        <div class="trolley">
+                        <div class="trolley"
 
                             <div class="trolley-quantity">
                                 <input type="number" name="number" min="0" max="1000" value="0" class="trolley-number" id="${currentProdId}">
@@ -120,6 +120,7 @@ function productCard(item){
                                 <i class="fas fa-minus-square minus third-color" onclick="minus('`+currentProdId+`')""></i>
                             </div>
                             <div class="trolley-icon"><i class="fas fa-shopping-cart" aria-hidden="true" onclick="moveToCart('`+currentProdId+`')"></i></div>
+
                         </div>
                     </div>
                 </div>
