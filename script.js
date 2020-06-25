@@ -58,6 +58,7 @@ function moveToCart(id) {
             cart.push(prodobj)
     }  
     console.log(cart)
+    sommaNumArt()
 }
 
 //funzione che aggiunge +1 al numero totale del prodotto
@@ -147,13 +148,13 @@ function productNumber() {
 }
 
 function sommaNumArt() {
-    debugger
     let dynamicIcon
-    if (cart.length == 1) {
+    if (cart.length === 1) {
         dynamicIcon = `${cart[0].counter}`
     } else {
-    cart.map(product => product.counter).reduce((total, num) => {
-        dynamicIcon = `${total + num}`
+    dynamicIcon = cart.map(product => product.counter).reduce((total, num) => {
+        return total + num
     })}
+        console.log(dynamicIcon)
         document.getElementById('lblCartCount').innerHTML = `${dynamicIcon}`;
 }
