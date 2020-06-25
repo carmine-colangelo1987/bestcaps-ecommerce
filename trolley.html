@@ -50,19 +50,22 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="row no-gutters">
-                                    <div class="trolley-card-body col-md-9">
+                                    <div class="trolley-card-body col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title">Card title</h5>
                                             <p class="card-text">Descriptiom</p>
                                             <p class="card-text quantity"><small class="text-muted pills">Quantità: 200 pills</small></p>
                                             <p class="card-text"><small class="text-muted days">Durata: 100 giorni</small></p>
-                                            <h5 class="card-title price second-color">12,30 </h5>   
+                                            <h5 class="card-title price second-color">12,30 €</h5>   
                                         </div>                 
                                     </div>
-                                    <div class="how-many col-md-1">
+                                    <div class="how-many col-md-2">
                                         <div class="trolley">
-                                            <div class="trolley-number"></div>
-                                            <div class="trolley-add"><i class="fas fa-plus-square" onclick="add()"></i><i class="fas fa-minus-square"></i></div>
+                                            <div class="trolley-quantity">
+                                                <input type="number" name="number" min="0" max="1000" value="0" class="trolley-number">
+                                                <i class="fas fa-plus-square plus third-color" onclick="this.parentNode.querySelector('[type=number]').stepUp();"></i>
+                                                <i class="fas fa-minus-square minus third-color" onclick="this.parentNode.querySelector('[type=number]').stepDown();"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -77,19 +80,22 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="row no-gutters">
-                                    <div class="trolley-card-body col-md-9">
+                                    <div class="trolley-card-body col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title">Card title</h5>
                                             <p class="card-text">Descriptiom</p>
                                             <p class="card-text quantity"><small class="text-muted pills">Quantità: 200 pills</small></p>
                                             <p class="card-text"><small class="text-muted days">Durata: 100 giorni</small></p>
-                                            <h5 class="card-title price second-color">12,30 </h5>   
+                                            <h5 class="card-title price second-color">12,30 €</h5>   
                                         </div>                 
                                     </div>
-                                    <div class="how-many col-md-1">
+                                    <div class="how-many col-md-2">
                                         <div class="trolley">
-                                            <div class="trolley-number"></div>
-                                            <div class="trolley-add"><i class="fas fa-plus-square" onclick="add()"></i><i class="fas fa-minus-square"></i></div>
+                                            <div class="trolley-quantity">
+                                                <input type="number" name="number" min="0" max="1000" value="0" class="trolley-number">
+                                                <i class="fas fa-plus-square plus third-color" onclick="this.parentNode.querySelector('[type=number]').stepUp();"></i>
+                                                <i class="fas fa-minus-square minus third-color" onclick="this.parentNode.querySelector('[type=number]').stepDown();"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -65,46 +65,72 @@
     .card-footer{
         display: flex;
         flex-direction: row;
+        align-items: center;
         justify-content: space-between;
+        padding: 8px;
         small{
-            max-width: 75px;
             color: $third-color!important;
-            padding-right: .8rem!important;
+            padding-right: 1rem!important;
         }
     }
     .trolley{
         display: flex;
         flex-direction: row;
         align-items: center;
+        height: 100%;
     }
-    .trolley-number{
-        background-color: $fourth-color;
+    .trolley-quantity{
         border: 1px solid $third-color;
-        height: 100%;
-        width: 35px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        line-height: 0rem;
-    }
-    .trolley-add{
         background-color: $fourth-color;
-        color: $third-color;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100%;
-        padding: 2px;
-        border-top: 1px solid $third-color;
-        border-bottom: 1px solid $third-color;
-        cursor: pointer;
+        position: relative;
         .fas{
+            font-size: 1.2rem;
+            position: absolute;
+            z-index: 2;
             &:hover{
                 color: darken($third-color, 20%);                
             }
             &:active{
                 color: $second-color;
             }
+        }
+        .plus{
+            top: 1px;
+            right: 3px;
+        }
+        .minus{
+            bottom: 1px;
+            right: 3px;
+        }
+        &:after{
+            content: '';
+            background-color: $third-color;
+            width:.8px;
+            height: 41px;
+            position: absolute;
+            top: -1px;
+            right: 23px;
+        }
+    }
+    .trolley-number{
+        background-color: $fourth-color;
+        color: $second-color;
+        border: none;
+        padding: 9px;
+        height: 100%;
+        width: 45px;
+        margin-right: 24px;
+        text-align: center;
+        line-height: 0rem;
+        &::-webkit-inner-spin-button, 
+        &::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+        &:focus{
+            outline: none;
         }
     }
     .trolley-icon{
@@ -123,7 +149,7 @@
         .fa-shopping-cart{            
             color: $fourth-color;
             font-size: 1rem; 
-            padding: 10px;
+            padding: 12.7px;
         }
     }
 }
