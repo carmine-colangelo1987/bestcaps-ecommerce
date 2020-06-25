@@ -4,7 +4,11 @@
         padding-right: 0!important;  
 
         .fas {
-            font-size: 1.75em;
+            font-size: 1.3em;
+            @media (min-width: 576px) { 
+                font-size: 1.75em;
+             }
+
         }
         .badge {
             padding-left: 9px;

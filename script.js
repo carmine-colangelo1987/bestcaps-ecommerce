@@ -1,3 +1,19 @@
+//Navbar
+let navbar = `
+    <a class="navbar-brand" href="index.html">
+        <img src="img/logo.svg" width="150" height="50" class="d-inline-block align-top" alt="">
+    </a>
+    <div class="navbar-nav ml-auto flex-row">
+        <a href="#" class="nav-item nav-link px-2"><i class="fas fa-user fifth-color"></i></a>
+        <a href="#" class="nav-item nav-link px-2"><i class="fas fa-heart fifth-color"></i></a>
+        <a href="trolley.html" class="nav-item nav-link px-2">
+            <i class="fas fa-shopping-cart fifth-color"></i>
+            <span class="badge badge-warning" id="lblCartCount">0</span>
+        </a>
+    </div>
+    `
+document.querySelector('.navbar').innerHTML = navbar;
+
 //Chiamata
 fetch('https://my-json-server.typicode.com/sarhita92/catalogue/db').then(result => {
     console.dir(result)
@@ -69,7 +85,7 @@ function add(id) {
     document.getElementById(id).setAttribute("value", `${addOne}`);
 }
 
-//funzione che toglie -1 al numero totale del prodotto fino ad arrivare a 0
+//funzione che toglie-1 al numero totale del prodotto fino ad arrivare a 0
 function minus(id) {
     let index = numbersProduct.findIndex(product => product.prodId === id);
     if (numbersProduct[index].counter > 0) {
@@ -94,6 +110,7 @@ function productCard(item){
         let productObject = {prodId : currentProdId, counter: 0};
         numbersProduct.push(productObject)
 
+        //crea ogni singola card
         productCard +=`        
             <div class="col mb-4 product text-center mt-5">
                 <div class="card">
@@ -138,7 +155,7 @@ function productCard(item){
     */
 }
 
-
+//funzione che aggiunge le stelle ai singoli prodotti
 function createStar(s){
     let star = ''
     for (i=0; i<s; i++){
@@ -171,3 +188,76 @@ function sommaNumArt() {
         console.log(dynamicIcon)
         document.getElementById('lblCartCount').innerHTML = `${dynamicIcon}`;
 }
+
+
+//Carrello
+
+//svuota carrello
+let emptyTrolley = `
+    <div class="first-card-trolley card card-trolley mb-3 fourth-color-bg">
+        <div class="delete-products p-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <h6 class="elements third-color m-md-0 mb-4 text-center text-md-left">Sono presenti 2 articoli nel carrello</h6>
+            <h6 class="remove first-color m-0 text-right font-weight-bold"><i class="fas fa-times pr-2"></i>Svuota carrello</h6>
+        </div>
+    </div>`
+document.querySelector('.main-trolley-container').innerHTML += emptyTrolley;
+
+//prodotti aggiunti --> aggiungere forEach 
+for (i=0; i<2; i++){
+    let addedProducts = `
+    <div class="card card-trolley mb-3 fourth-color-bg">
+        <div class="trolley-align text-center text-md-left row no-gutters">
+            <div class="col-md-4">
+                <img src="imgs/ph-sport.jpg" class="card-img" alt="product">
+            </div>
+            <div class="col-md-8">
+                <div class="row no-gutters general-wrapper">
+                    <h6 class="second-color font-weight-bold remove-product p-2"><i class="fas fa-times pr-2"></i>Remove</h6>
+                    <div class="trolley-card-body col-md-9">
+                        <div class="card-body">
+                            <h5 class="card-title first-color">Card title</h5>
+                            <p class="card-text">Descriptiom</p>
+                            <p class="card-text quantity"><small class="text-muted pills">Quantità: 200 pills</small></p>
+                            <p class="card-text"><small class="text-muted days">Durata: 100 giorni</small></p>
+                            <h5 class="card-title price second-color m-0">12,30 €</h5>   
+                        </div>                 
+                    </div>
+                    <div class="how-many col-md-1">
+                        <div class="trolley ml-md-0">
+                            <div class="trolley-quantity">
+                                <input type="number" name="number" min="0" max="1000" value="0" class="trolley-number">
+                                <i class="fas fa-plus-square plus third-color" onclick="this.parentNode.querySelector('[type=number]').stepUp();"></i>
+                                <i class="fas fa-minus-square minus third-color" onclick="this.parentNode.querySelector('[type=number]').stepDown();"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`
+
+    document.querySelector('.main-trolley-container').innerHTML += addedProducts;
+}
+
+//totale da pagare
+let tot =`
+<div class="card fourth-color-bg p-4">
+    <div class="prices-wrapper">
+        
+    </div>
+    <div class="trolley-tot d-flex justify-content-between align-items-center">
+        <h5 class="first-color font-weight-bold">TOT</h5><h5 class="second-color font-weight-bold">24,60 €</h5>
+    </div>
+    <button class="btn go-to-pay first-color-bg mt-3"><h5 class="text-uppercase m-0 p-2 fourth-color">vai alla cassa</h5></button>
+</div>`
+document.querySelector('.main-tot-prices').innerHTML += tot;    
+
+//prezzi prodotti da sommare
+let prices = `
+<div class="prices d-flex justify-content-between align-items-center">
+    <h7 class="first-color">First article</h7><h7 class="second-color">12,30 €</h7>
+</div>
+<div class="prices d-flex justify-content-between align-items-center">
+    <h7 class="first-color">First article</h7><h7 class="second-color">12,30 €</h7>
+</div>`
+document.querySelector('.prices-wrapper').innerHTML += prices;
