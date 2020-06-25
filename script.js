@@ -38,6 +38,13 @@ function init(object){
 
 //crea un array composto dal numero totale dei singoli prodotti
 var numbersProduct = [];
+var productSelected = [];
+
+function moveToCart(id) {
+    let index = numbersProduct.findIndex(product => product.prodId === id);
+    const returnedTarget = Object.assign(productSelected, numbersProduct[index]);
+    console.log(productSelected)
+}
 
 //funzione che aggiunge +1 al numero totale del prodotto
 function add(id) {
@@ -93,7 +100,7 @@ function productCard(item){
                         <div class="trolley">
                             <div class="trolley-number d-flex align-items-center justify-content-center" id="${currentProdId}">0</div>
                             <div class="trolley-add"><i class="fas fa-plus-square" onclick="add('`+currentProdId+`')"></i><i class="fas fa-minus-square" onclick="minus('`+currentProdId+`')"></i></div>
-                            <div class="trolley-icon"><i class="fas fa-shopping-cart" aria-hidden="true"></i></div>
+                            <div class="trolley-icon"><i class="fas fa-shopping-cart" aria-hidden="true" onclick="moveToCart('`+currentProdId+`')"></i></div>
                         </div>
                     </div>
                 </div>
@@ -113,7 +120,7 @@ function createStar(s){
 }
 
 //array in cui mettere i prodotti selezionati
-let productSelected = ['prova', 'prova']
+//let productSelected = ['prova', 'prova']
 
 /*
 funzione per il numero dei prodotti selezionati da visualizzare sull'icona del carrello
