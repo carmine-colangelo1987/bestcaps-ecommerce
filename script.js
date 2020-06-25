@@ -37,7 +37,29 @@ function init(object){
 }
 
 //crea un array composto dal numero totale dei singoli prodotti
-var numbersProduct = [];
+let numbersProduct = [];
+
+//array in cui mettere i prodotti selezionati
+let cart = [];
+
+function moveToCart(id) {
+    let index = numbersProduct.findIndex(product => product.prodId === id);
+    let prodobj = {};
+    Object.assign(prodobj, numbersProduct[index]);
+
+    if (cart.length > 0) {
+        let index = cart.findIndex(product => product.prodId === id)        
+        if (index >=0) {
+            cart[index].counter = prodobj.counter
+        } else {
+            cart.push(prodobj)
+        }
+    } else {
+            cart.push(prodobj)
+    }  
+    console.log(cart)
+    sommaNumArt()
+}
 
 //funzione che aggiunge +1 al numero totale del prodotto
 function add(id) {
@@ -93,7 +115,7 @@ function productCard(item){
                         <div class="trolley">
                             <div class="trolley-number d-flex align-items-center justify-content-center" id="${currentProdId}"></div>
                             <div class="trolley-add"><i class="fas fa-plus-square" onclick="add('`+currentProdId+`')"></i><i class="fas fa-minus-square" onclick="minus('`+currentProdId+`')"></i></div>
-                            <div class="trolley-icon"><i class="fas fa-shopping-cart" aria-hidden="true"></i></div>
+                            <div class="trolley-icon"><i class="fas fa-shopping-cart" aria-hidden="true" onclick="moveToCart('`+currentProdId+`')"></i></div>
                         </div>
                     </div>
                 </div>
@@ -113,7 +135,7 @@ function createStar(s){
 }
 
 //array in cui mettere i prodotti selezionati
-let productSelected = ['prova', 'prova']
+//let productSelected = ['prova', 'prova']
 
 /*
 funzione per il numero dei prodotti selezionati da visualizzare sull'icona del carrello
@@ -125,10 +147,14 @@ function productNumber() {
     document.getElementById('lblCartCount').innerHTML = `${productSelected.length}`;
 }
 
-/*
-numbers = [{a:175}, {a:50}, {a:25}];
-
-numbers.map(x => x.a).reduce((total, num) => {
-    return total + num;
-});
-*/
+function sommaNumArt() {
+    let dynamicIcon
+    if (cart.length === 1) {
+        dynamicIcon = `${cart[0].counter}`
+    } else {
+    dynamicIcon = cart.map(product => product.counter).reduce((total, num) => {
+        return total + num
+    })}
+        console.log(dynamicIcon)
+        document.getElementById('lblCartCount').innerHTML = `${dynamicIcon}`;
+}
