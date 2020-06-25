@@ -38,6 +38,8 @@ function init(object){
 
 //crea un array composto dal numero totale dei singoli prodotti
 let numbersProduct = [];
+
+//array in cui mettere i prodotti selezionati
 let cart = [];
 
 function moveToCart(id) {
@@ -144,10 +146,14 @@ function productNumber() {
     document.getElementById('lblCartCount').innerHTML = `${productSelected.length}`;
 }
 
-/*
-numbers = [{a:175}, {a:50}, {a:25}];
-
-numbers.map(x => x.a).reduce((total, num) => {
-    return total + num;
-});
-*/
+function sommaNumArt() {
+    debugger
+    let dynamicIcon
+    if (cart.length == 1) {
+        dynamicIcon = `${cart[0].counter}`
+    } else {
+    cart.map(product => product.counter).reduce((total, num) => {
+        dynamicIcon = `${total + num}`
+    })}
+        document.getElementById('lblCartCount').innerHTML = `${dynamicIcon}`;
+}
