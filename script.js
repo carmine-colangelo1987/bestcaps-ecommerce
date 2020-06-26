@@ -257,6 +257,7 @@ if (!!document.querySelector('.trolley-page')) {
         document.querySelector('.num-elements').innerHTML = ' 0 ';
         document.querySelector('.prices-wrapper').innerHTML = '';
         document.querySelector('.tot-to-pay').innerHTML = '0 €';
+        document.querySelector('.remove').innerHTML = '';
     }
 
     //rimuovere prodotto
