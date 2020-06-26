@@ -216,14 +216,14 @@ if (!!document.querySelector('.trolley-page')) {
     for (i = 0; i < 2; i++) {
         let addedProducts = `
             
-            <div class="card card-trolley mb-3 fourth-color-bg">
+            <div id="${i}" class="card card-trolley mb-3 fourth-color-bg">
                 <div class="trolley-align text-center text-md-left row no-gutters">
                     <div class="col-md-4">
                         <img src="imgs/ph-sport.jpg" class="card-img" alt="product">
                     </div>
                     <div class="col-md-8">
                         <div class="row no-gutters general-wrapper">
-                            <h6 class="second-color font-weight-bold remove-product p-2"><i class="fas fa-times pr-2"></i>Remove</h6>
+                            <h6 class="second-color font-weight-bold remove-product p-2" onclick="productRemove(${i})"><i class="fas fa-times pr-2"></i>Remove</h6>
                             <div class="trolley-card-body col-md-9">
                                 <div class="card-body">
                                     <h5 class="card-title first-color">Card title</h5>
@@ -237,7 +237,7 @@ if (!!document.querySelector('.trolley-page')) {
                                 <div class="trolley ml-md-0">
                                     <div class="trolley-quantity">
                                         <input type="number" name="number" min="0" max="1000" value="0" class="trolley-number">
-                                        <i class="fas fa-plus-square plus third-color" onclick="this.parentNode.querySelector('[type=number]').stepUp();"></i>
+                                        <i class="fas fa-plus-square plus third-color" onclick="this.document.querySelector('[type=number]').stepUp();"></i>
                                         <i class="fas fa-minus-square minus third-color" onclick="this.parentNode.querySelector('[type=number]').stepDown();"></i>
                                     </div>
                                 </div>
@@ -259,6 +259,11 @@ if (!!document.querySelector('.trolley-page')) {
         document.querySelector('.tot-to-pay').innerHTML = '0 €';
     }
 
+    //rimuovere prodotto
+    function productRemove(){
+        document.querySelector('.cards-trolley').remove();
+    }
+
     //totale da pagare
     let tot = `
         <div class="card fourth-color-bg p-4">
@@ -272,8 +277,8 @@ if (!!document.querySelector('.trolley-page')) {
         </div>`
             document.querySelector('.main-tot-prices').innerHTML += tot;
 
-            //prezzi prodotti da sommare
-            let prices = `
+    //prezzi prodotti da sommare
+    let prices = `
         <div class="prices d-flex justify-content-between align-items-center">
         <h7 class="first-color">First article</h7><h7 class="second-color">12,30 €</h7>
         </div>
