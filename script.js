@@ -136,10 +136,10 @@ function productCard(item) {
 
                             <div class="trolley-quantity fourth-color-bg">
                                 <input type="number" name="number" min="0" max="1000" value="0" class="trolley-number" id="${currentProdId}">
-                                <i class="fas fa-plus-square plus third-color" onclick="add('`+ currentProdId + `')" ></i>
-                                <i class="fas fa-minus-square minus third-color" onclick="minus('`+ currentProdId + `')""></i>
+                                <i class="fas fa-plus-square plus third-color" onclick="add('${currentProdId}')" ></i>
+                                <i class="fas fa-minus-square minus third-color" onclick="minus('${currentProdId}')"></i>
                             </div>
-                            <div class="trolley-icon second-color-bg"><i class="fas fa-shopping-cart" aria-hidden="true" onclick="moveToCart('`+ currentProdId + `')"></i></div>
+                            <div class="trolley-icon second-color-bg"><i class="fas fa-shopping-cart" aria-hidden="true" onclick="moveToCart('${currentProdId}')"></i></div>
 
                         </div>
                     </div>
