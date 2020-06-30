@@ -244,21 +244,21 @@ if (!!document.querySelector('.trolley-page')) {
         let n = productStored.prezzo / 1000;
         let addedProducts = `
             
-            <div id="${productStored.id}" class="card card-trolley mb-3 fourth-color-bg">
+            <div id="${productStored.prodId}" class="card card-trolley mb-3 fourth-color-bg">
                 <div class="trolley-align text-center text-md-left row no-gutters">
                     <div class="col-md-4">
                         <img src="imgs/ph-sport.jpg" class="card-img" alt="product">
                     </div>
                     <div class="col-md-8">
                         <div class="row no-gutters general-wrapper">
-                            <h6 class="second-color font-weight-bold remove-product p-2" onclick="productRemove(${i})"><i class="fas fa-times pr-2"></i>Remove</h6>
+                            <h6 class="second-color font-weight-bold remove-product p-2" onclick="productRemove('${i}')"><i class="fas fa-times pr-2"></i>Remove</h6>
                             <div class="trolley-card-body col-md-9">
                                 <div class="card-body">
                                     <h5 class="card-title first-color">${productStored.nome}</h5>
                                     <p class="card-text">Questo prodotto è ottimo per allenarsi</p>
-                                    <p class="card-text quantity"><small class="text-muted pills">Quantità: ${productStored.capsule} capsule</small></p>
-                                    <p class="card-text"><small class="text-muted days">Durata: ${Math.floor(productStored.capsule / productStored.dose)} giorni</small></p>
-                                    <h5 class="card-title price second-color m-0">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n)}</h5>   
+                                    <p class="card-text quantity"><small class="text-muted pills">Quantità: ${productStored.capsule * productStored.counter} capsule</small></p>
+                                    <p class="card-text"><small class="text-muted days">Durata: ${Math.floor((productStored.capsule *productStored.counter) / productStored.dose)} giorni</small></p>
+                                    <h5 class="card-title price second-color m-0">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n * productStored.counter)}</h5>   
                                 </div>                 
                             </div>
                             <div class="how-many col-md-1">
@@ -284,6 +284,8 @@ if (!!document.querySelector('.trolley-page')) {
         
         localStorage.clear();
         location.reload();
+        
+
         
         /*
         document.querySelector('.cards-trolley').innerHTML = '';
