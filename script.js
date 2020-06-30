@@ -50,7 +50,7 @@ function moveToCart(id) {
     if (cart.length > 0) {
         let index = cart.findIndex(product => product.prodId === id)        
         if (index >=0) {
-            cart[index].counter = prodobj.counter
+            cart[index].counter += prodobj.counter
         } else {
             cart.push(prodobj)
         }
