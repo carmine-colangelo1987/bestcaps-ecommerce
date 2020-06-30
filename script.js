@@ -123,11 +123,11 @@ function productCard(item) {
                         <p class="card-text text">Questo prodotto è ottimo per allenarsi</p>
                         <p class="card-text quantity"><small class="text-muted pills">Quantità: ${item[x].capsule} pills</small></p>
                         <p class="card-text"><small class="text-muted days">Dose giornaliera:  ${item[x].dose}</small></p>
-                        <div class="stars">`
-            +
-            createStar(item[x].rating)
-            +
-            `</div>
+                        <div class="stars">
+            
+            ${createStar(item[x].rating)}
+            
+            </div>
                         <h5 class="card-title price second-color">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n)}</h5>                    
                     </div>
                     <div class="card-footer card-footer-product">
