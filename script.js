@@ -265,7 +265,7 @@ if (!!document.querySelector('.trolley-page')) {
                                 <div class="trolley ml-md-0">
                                     <div class="trolley-quantity">
                                         <input type="number" name="number" min="0" max="1000" value="${productStored.counter}" class="trolley-number">
-                                        <i class="fas fa-plus-square plus third-color" onclick="this.document.querySelector('[type=number]').stepUp();"></i>
+                                        <i class="fas fa-plus-square plus third-color" onclick="this.parentNode.querySelector('[type=number]').stepUp();"></i>
                                         <i class="fas fa-minus-square minus third-color" onclick="this.parentNode.querySelector('[type=number]').stepDown();"></i>
                                     </div>
                                 </div>
