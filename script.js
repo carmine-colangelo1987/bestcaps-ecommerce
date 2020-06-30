@@ -138,7 +138,7 @@ function productCard(item) {
                     <div class="card-body">
                         <h5 class="card-title title mt-4 first-color">${item[x].nome}</h5>
                         <p class="card-text text">Questo prodotto è ottimo per allenarsi</p>
-                        <p class="card-text quantity"><small class="text-muted pills">Quantità: ${item[x].capsule} pills</small></p>
+                        <p class="card-text quantity"><small class="text-muted pills">Quantità: ${item[x].capsule} capsule</small></p>
                         <p class="card-text"><small class="text-muted days">Dose giornaliera:  ${item[x].dose}</small></p>
                         <div class="stars">
             
@@ -217,10 +217,17 @@ function sommaNumArt() {
 
 if (!!document.querySelector('.trolley-page')) {
     //svuota carrello
+    let dynamicIcon 
+    let productStored = JSON.parse(localStorage.getItem("cart"))
+
+    dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
+        return total + num
+    })
+
     let emptyTrolley = `
         <div class="first-card-trolley card card-trolley mb-3 fourth-color-bg">
             <div class="delete-products p-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
-                <h6 class="elements third-color m-md-0 mb-4 text-center text-md-left">Sono presenti<span class="num-elements"> 2 </span>articoli nel carrello</h6>
+                <h6 class="elements third-color m-md-0 mb-4 text-center text-md-left">Sono presenti<span class="num-elements"> ${dynamicIcon} </span>articoli nel carrello</h6>
                 <h6 class="remove first-color m-0 text-right font-weight-bold" onclick="empty()"><i class="fas fa-times pr-2"></i>Svuota carrello</h6>
             </div>
         </div>
@@ -249,7 +256,7 @@ if (!!document.querySelector('.trolley-page')) {
                                 <div class="card-body">
                                     <h5 class="card-title first-color">${productStored.nome}</h5>
                                     <p class="card-text">Questo prodotto è ottimo per allenarsi</p>
-                                    <p class="card-text quantity"><small class="text-muted pills">Quantità: ${productStored.capsule} pills</small></p>
+                                    <p class="card-text quantity"><small class="text-muted pills">Quantità: ${productStored.capsule} capsule</small></p>
                                     <p class="card-text"><small class="text-muted days">Durata: ${productStored.capsule / productStored.dose} giorni</small></p>
                                     <h5 class="card-title price second-color m-0">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n)}</h5>   
                                 </div>                 
@@ -257,7 +264,7 @@ if (!!document.querySelector('.trolley-page')) {
                             <div class="how-many col-md-1">
                                 <div class="trolley ml-md-0">
                                     <div class="trolley-quantity">
-                                        <input type="number" name="number" min="0" max="1000" value="0" class="trolley-number">
+                                        <input type="number" name="number" min="0" max="1000" value="${productStored.counter}" class="trolley-number">
                                         <i class="fas fa-plus-square plus third-color" onclick="this.document.querySelector('[type=number]').stepUp();"></i>
                                         <i class="fas fa-minus-square minus third-color" onclick="this.parentNode.querySelector('[type=number]').stepDown();"></i>
                                     </div>
