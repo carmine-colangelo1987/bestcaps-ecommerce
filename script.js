@@ -220,9 +220,12 @@ if (!!document.querySelector('.trolley-page')) {
     let dynamicIcon 
     let productStored = JSON.parse(localStorage.getItem("cart"))
 
+    if ('cart' in localStorage) {
     dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
         return total + num
-    })
+    })} else {
+        dynamicIcon = 0;
+    }
 
     let emptyTrolley = `
         <div class="first-card-trolley card card-trolley mb-3 fourth-color-bg">
@@ -238,7 +241,8 @@ if (!!document.querySelector('.trolley-page')) {
 
     document.querySelector('.main-trolley-container').innerHTML += emptyTrolley;
 
-    //prodotti aggiunti --> aggiungere forEach 
+    //prodotti aggiunti --> aggiungere forEach
+    if('cart' in localStorage) { 
     for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
         let productStored = JSON.parse(localStorage.getItem("cart"))[i]
         let n = productStored.prezzo / 1000;
@@ -257,7 +261,7 @@ if (!!document.querySelector('.trolley-page')) {
                                     <h5 class="card-title first-color">${productStored.nome}</h5>
                                     <p class="card-text">Questo prodotto è ottimo per allenarsi</p>
                                     <p class="card-text quantity"><small class="text-muted pills">Quantità: ${productStored.capsule} capsule</small></p>
-                                    <p class="card-text"><small class="text-muted days">Durata: ${productStored.capsule / productStored.dose} giorni</small></p>
+                                    <p class="card-text"><small class="text-muted days">Durata: ${Math.floor(productStored.capsule / productStored.dose)} giorni</small></p>
                                     <h5 class="card-title price second-color m-0">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n)}</h5>   
                                 </div>                 
                             </div>
@@ -277,15 +281,21 @@ if (!!document.querySelector('.trolley-page')) {
 
         
         document.querySelector('.cards-trolley').innerHTML += addedProducts;
-    }
+    }}
 
     //funzione svuota carrello
     function empty() {
+        
+        localStorage.clear();
+        location.reload();
+        
+        /*
         document.querySelector('.cards-trolley').innerHTML = '';
         document.querySelector('.num-elements').innerHTML = ' 0 ';
         document.querySelector('.prices-wrapper').innerHTML = '';
         document.querySelector('.tot-to-pay').innerHTML = '0 €';
         document.querySelector('.remove').innerHTML = '';
+        */
     }
 
     //rimuovere prodotto
@@ -294,7 +304,8 @@ if (!!document.querySelector('.trolley-page')) {
     }
 
     //totale da pagare
-    let tot = `
+    if ('cart' in localStorage) {
+        let tot = `
         <div class="card fourth-color-bg p-4">
         <div class="prices-wrapper">
             
@@ -304,15 +315,19 @@ if (!!document.querySelector('.trolley-page')) {
         </div>
         <button class="btn go-to-pay first-color-bg mt-3"><h5 class="text-uppercase m-0 p-2 fourth-color">vai alla cassa</h5></button>
         </div>`
-            document.querySelector('.main-tot-prices').innerHTML += tot;
-
+        document.querySelector('.main-tot-prices').innerHTML += tot;
+    }
+    
     //prezzi prodotti da sommare
-    let prices = `
-        <div class="prices d-flex justify-content-between align-items-center">
-        <h7 class="first-color">First article</h7><h7 class="second-color">12,30 €</h7>
-        </div>
-        <div class="prices d-flex justify-content-between align-items-center">
-        <h7 class="first-color">First article</h7><h7 class="second-color">12,30 €</h7>
-        </div>`
-    document.querySelector('.prices-wrapper').innerHTML += prices;
+    if('cart' in localStorage) { 
+        for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
+            let productStored = JSON.parse(localStorage.getItem("cart"))[i]
+            let n = productStored.prezzo / 1000;
+            let prices = `
+                <div class="prices d-flex justify-content-between align-items-center">
+                <h7 class="first-color">${productStored.nome}</h7><h7 class="second-color">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n*productStored.counter)}</h7>
+                </div>`
+            document.querySelector('.prices-wrapper').innerHTML += prices;
+            }
+    }
 }
