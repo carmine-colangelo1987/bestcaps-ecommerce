@@ -12,7 +12,18 @@ let navbar = `
         </a>
     </div>
     `
+
 document.querySelector('.navbar').innerHTML = navbar;
+
+
+if (JSON.parse(localStorage.getItem("cart"))) {
+    let dynamicIcon
+    let productStored = JSON.parse(localStorage.getItem("cart"))
+    dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
+        return total + num
+    })
+    document.getElementById('lblCartCount').innerHTML = `${dynamicIcon}`;
+}
 
 //Chiamata
 
@@ -77,6 +88,8 @@ function moveToCart(id) {
         cart.push(prodobj)
     }
     console.log(cart)
+    localStorage.setItem(`cart`, JSON.stringify(cart));
+    console.log(localStorage.cart)
     sommaNumArt()
 }
 
@@ -110,7 +123,7 @@ function productCard(item) {
         let currentProdId = item[x].nome.replace(/\./g, '').replace(/ /g, '') + item[x].id;
 
         //crea i singoli elmenti dell'array per fare i singoli counter dei prodotti
-        let productObject = { prodId: currentProdId, counter: 0 };
+        let productObject = { prodId: currentProdId, counter: 0, nome: item[x].nome, prezzo: item[x].prezzo, capsule: item[x].capsule, dose: item[x].dose, rating: item[x].rating};
         numbersProduct.push(productObject)
 
         //crea ogni singola card
@@ -181,11 +194,13 @@ probabilmente andrà inserita all'interno della funzione che verrà richiamata a
 nell'icona
 */
 function sommaNumArt() {
-    let dynamicIcon
-    if (cart.length === 1) {
-        dynamicIcon = `${cart[0].counter}`
+    let dynamicIcon 
+    let productStored = JSON.parse(localStorage.getItem("cart"))
+    if (productStored.length === 1) {
+        dynamicIcon = `${productStored[0].counter}`
     } else {
-        dynamicIcon = cart.map(product => product.counter).reduce((total, num) => {
+        
+        dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
             return total + num
         })
     }
