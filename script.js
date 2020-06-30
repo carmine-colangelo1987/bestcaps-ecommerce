@@ -51,15 +51,11 @@ function init(object) {
     function createListName(item) {
         let listItem = `
         <div class="category mt-5 text-center"><span class="line first-color-bg"></span><h3 class="first-color">${item}</h3><span class="line first-color-bg"></span></div>
-        <div id="${item}" class="cards-wrapper row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">`
-
-            +
-
-            productCard(Object.values(object[item]))
-
-            +
-
-            `</div>`
+        <div id="${item}" class="cards-wrapper row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+        
+        ${productCard(Object.values(object[item]))}
+        
+        </div>`
         let listItemQuery = document.querySelector('.list-item');
         if (!!listItemQuery)
         document.querySelector('.list-item').innerHTML += listItem;
