@@ -305,18 +305,40 @@ if (!!document.querySelector('.trolley-page')) {
 
     //totale da pagare
     if ('cart' in localStorage) {
+        let totalPrice = 0
+
+        for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
+            let productStored = JSON.parse(localStorage.getItem("cart"))[i]
+            let n = productStored.prezzo/1000
+            totalPrice += n * productStored.counter;
+        }
+
         let tot = `
         <div class="card fourth-color-bg p-4">
         <div class="prices-wrapper">
             
         </div>
         <div class="trolley-tot d-flex justify-content-between align-items-center">
-            <h5 class="first-color font-weight-bold">TOT</h5><h5 class="second-color tot-to-pay font-weight-bold">24,60 €</h5>
+            <h5 class="first-color font-weight-bold">TOT</h5><h5 class="second-color tot-to-pay font-weight-bold">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(totalPrice)}</h5>
+        </div>
+        <button class="btn go-to-pay first-color-bg mt-3"><h5 class="text-uppercase m-0 p-2 fourth-color">vai alla cassa</h5></button>
+        </div>`
+        document.querySelector('.main-tot-prices').innerHTML += tot;
+    } else {
+        let tot = `
+        <div class="card fourth-color-bg p-4">
+        <div class="prices-wrapper">
+            
+        </div>
+        <div class="trolley-tot d-flex justify-content-between align-items-center">
+            <h5 class="first-color font-weight-bold">TOT</h5><h5 class="second-color tot-to-pay font-weight-bold">0 €</h5>
         </div>
         <button class="btn go-to-pay first-color-bg mt-3"><h5 class="text-uppercase m-0 p-2 fourth-color">vai alla cassa</h5></button>
         </div>`
         document.querySelector('.main-tot-prices').innerHTML += tot;
     }
+    
+
     
     //prezzi prodotti da sommare
     if('cart' in localStorage) { 
