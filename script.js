@@ -260,9 +260,9 @@ if (!!document.querySelector('.trolley-page')) {
                                 <div class="card-body">
                                     <h5 class="card-title first-color">${productStored.nome}</h5>
                                     <p class="card-text">Questo prodotto è ottimo per allenarsi</p>
-                                    <p class="card-text quantity"><small class="text-muted pills">Quantità: ${productStored.capsule} capsule</small></p>
-                                    <p class="card-text"><small class="text-muted days">Durata: ${Math.floor(productStored.capsule / productStored.dose)} giorni</small></p>
-                                    <h5 class="card-title price second-color m-0">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n)}</h5>   
+                                    <p class="card-text quantity"><small class="text-muted pills">Quantità: ${productStored.capsule * productStored.counter} capsule</small></p>
+                                    <p class="card-text"><small class="text-muted days">Durata: ${Math.floor((productStored.capsule *productStored.counter) / productStored.dose)} giorni</small></p>
+                                    <h5 class="card-title price second-color m-0">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n * productStored.counter)}</h5>   
                                 </div>                 
                             </div>
                             <div class="how-many col-md-1">
