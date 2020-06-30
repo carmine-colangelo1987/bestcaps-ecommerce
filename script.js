@@ -72,6 +72,10 @@ let numbersProduct = [];
 //array in cui mettere i prodotti selezionati
 let cart = [];
 
+if("cart" in localStorage) {
+    cart = JSON.parse(localStorage.getItem("cart"))
+}
+
 function moveToCart(id) {
     let index = numbersProduct.findIndex(product => product.prodId === id);
     let prodobj = {};
@@ -228,10 +232,12 @@ if (!!document.querySelector('.trolley-page')) {
     document.querySelector('.main-trolley-container').innerHTML += emptyTrolley;
 
     //prodotti aggiunti --> aggiungere forEach 
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
+        let productStored = JSON.parse(localStorage.getItem("cart"))[i]
+        let n = productStored.prezzo / 1000;
         let addedProducts = `
             
-            <div id="${i}" class="card card-trolley mb-3 fourth-color-bg">
+            <div id="${productStored.id}" class="card card-trolley mb-3 fourth-color-bg">
                 <div class="trolley-align text-center text-md-left row no-gutters">
                     <div class="col-md-4">
                         <img src="imgs/ph-sport.jpg" class="card-img" alt="product">
@@ -241,11 +247,11 @@ if (!!document.querySelector('.trolley-page')) {
                             <h6 class="second-color font-weight-bold remove-product p-2" onclick="productRemove(${i})"><i class="fas fa-times pr-2"></i>Remove</h6>
                             <div class="trolley-card-body col-md-9">
                                 <div class="card-body">
-                                    <h5 class="card-title first-color">Card title</h5>
-                                    <p class="card-text">Descriptiom</p>
-                                    <p class="card-text quantity"><small class="text-muted pills">Quantità: 200 pills</small></p>
-                                    <p class="card-text"><small class="text-muted days">Durata: 100 giorni</small></p>
-                                    <h5 class="card-title price second-color m-0">12,30 €</h5>   
+                                    <h5 class="card-title first-color">${productStored.nome}</h5>
+                                    <p class="card-text">Questo prodotto è ottimo per allenarsi</p>
+                                    <p class="card-text quantity"><small class="text-muted pills">Quantità: ${productStored.capsule} pills</small></p>
+                                    <p class="card-text"><small class="text-muted days">Durata: ${productStored.capsule / productStored.dose} giorni</small></p>
+                                    <h5 class="card-title price second-color m-0">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n)}</h5>   
                                 </div>                 
                             </div>
                             <div class="how-many col-md-1">
