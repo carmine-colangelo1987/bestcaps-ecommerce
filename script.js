@@ -79,7 +79,7 @@ function moveToCart(id) {
 
     if (cart.length > 0) {
         let index = cart.findIndex(product => product.prodId === id)
-        if (index >= 0) {
+        if (index > 0) {
             cart[index].counter += prodobj.counter
         } else {
             cart.push(prodobj)
@@ -96,19 +96,40 @@ function moveToCart(id) {
 //funzione che aggiunge +1 al numero totale del prodotto
 function add(id) {
     let index = numbersProduct.findIndex(product => product.prodId === id);
-    let addOne = numbersProduct[index].counter + 1;
-    numbersProduct[index].counter = addOne;
-    document.getElementById(id).setAttribute("value", `${addOne}`);
+    const value = Number(document.getElementById(id).value);
+    numbersProduct[index].counter += 1;
+    document.getElementById(id).value = value + 1;
 }
 
 //funzione che toglie-1 al numero totale del prodotto fino ad arrivare a 0
 function minus(id) {
     let index = numbersProduct.findIndex(product => product.prodId === id);
     if (numbersProduct[index].counter > 0) {
-        let minOne = numbersProduct[index].counter - 1;
-        numbersProduct[index].counter = minOne;
-        document.getElementById(id).setAttribute("value", `${minOne}`);
+        const value = Number(document.getElementById(id).value);
+        numbersProduct[index].counter += -1;
+        document.getElementById(id).value = value - 1;
     }
+}
+
+/*
+funzione per il numero dei prodotti selezionati da visualizzare sull'icona del carrello
+probabilmente andrà inserita all'interno della funzione che verrà richiamata al click del pulsante
+"aggiungi al carrello" del singolo prodotto, così da aggiornare di volta in volta il numero totale
+nell'icona
+*/
+function sommaNumArt() {
+    let dynamicIcon
+    let productStored = JSON.parse(localStorage.getItem("cart"))
+    if (productStored.length === 1) {
+        dynamicIcon = `${productStored[0].counter}`
+    } else {
+
+        dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
+            return total + num
+        })
+    }
+    console.log(dynamicIcon)
+    document.getElementById('lblCartCount').innerHTML = `${dynamicIcon}`;
 }
 
 function productCard(item) {
@@ -174,8 +195,8 @@ function productCard(item) {
 function productCounter(currentProdId, counter = 0) {
     return `
     <div class="trolley-quantity fourth-color-bg">
-        <input type="number" name="number" min="0" max="1000" value="${counter}" class="trolley-number" id="${currentProdId}">
-        <i class="fas fa-plus-square plus third-color" onclick="add('${currentProdId}')" ></i>
+        <input type="number" name="number" min="0" max="1000" oninput="moveToCart(${currentProdId})" value="${counter}" class="trolley-number" id="${currentProdId}">
+        <i class="fas fa-plus-square plus third-color"  onclick="add('${currentProdId}')" ></i>
         <i class="fas fa-minus-square minus third-color" onclick="minus('${currentProdId}')"></i>
     </div>`
 }
@@ -196,26 +217,7 @@ function productNumber() {
     document.getElementById('lblCartCount').innerHTML = `${productSelected.length}`;
 }*/
 
-/*
-funzione per il numero dei prodotti selezionati da visualizzare sull'icona del carrello
-probabilmente andrà inserita all'interno della funzione che verrà richiamata al click del pulsante
-"aggiungi al carrello" del singolo prodotto, così da aggiornare di volta in volta il numero totale
-nell'icona
-*/
-function sommaNumArt() {
-    let dynamicIcon
-    let productStored = JSON.parse(localStorage.getItem("cart"))
-    if (productStored.length === 1) {
-        dynamicIcon = `${productStored[0].counter}`
-    } else {
 
-        dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
-            return total + num
-        })
-    }
-    console.log(dynamicIcon)
-    document.getElementById('lblCartCount').innerHTML = `${dynamicIcon}`;
-}
 
 
 //Carrello
@@ -225,7 +227,7 @@ if (!!document.querySelector('.trolley-page')) {
     let dynamicIcon
     let productStored = JSON.parse(localStorage.getItem("cart"))
 
-    if ('cart' in localStorage && productStored.length > 0) {
+    if ('cart' in localStorage) {
     dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
         return total + num
     })} else {
