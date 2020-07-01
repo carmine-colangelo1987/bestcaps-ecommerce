@@ -16,7 +16,7 @@ let navbar = `
 document.querySelector('.navbar').innerHTML = navbar;
 
 
-if (JSON.parse(localStorage.getItem("cart"))) {
+if (JSON.parse(localStorage.getItem("cart")) && JSON.parse(localStorage.getItem("cart")).length > 0) {
     let dynamicIcon
     let productStored = JSON.parse(localStorage.getItem("cart"))
     dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
@@ -225,11 +225,10 @@ if (!!document.querySelector('.trolley-page')) {
     let dynamicIcon
     let productStored = JSON.parse(localStorage.getItem("cart"))
 
-    if ('cart' in localStorage) {
-        dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
-            return total + num
-        })
-    } else {
+    if ('cart' in localStorage && productStored.length > 0) {
+    dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
+        return total + num
+    })} else {
         dynamicIcon = 0;
     }
 
@@ -306,8 +305,13 @@ if (!!document.querySelector('.trolley-page')) {
     }
 
     //rimuovere prodotto
-    function productRemove() {
-        document.querySelector('.cards-trolley').remove();
+    function productRemove(x){
+        debugger
+        let productStored = JSON.parse(localStorage.getItem("cart"))
+        productStored.splice(x, 1);
+        localStorage.setItem(`cart`, JSON.stringify(productStored))
+        location.reload();
+        //document.querySelector('.cards-trolley').remove();
     }
 
     //totale da pagare
