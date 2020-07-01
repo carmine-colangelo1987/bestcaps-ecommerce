@@ -271,8 +271,9 @@ if (!!document.querySelector('.trolley-page')) {
                                 </div>                 
                             </div>
                             <div class="how-many col-md-1">
-                                <div class="trolley ml-md-0">
+                                <div class="reload ml-md-0">
                                     ${productCounter(productStored.prodId, productStored.counter)}
+                                    <div class="reload-icon second-color-bg"><i class="fas fa-redo-alt" aria-hidden="true" onclick="moveToCart('${productStored.prodId}')"></i></div>
                                 </div>
                             </div>
                         </div>

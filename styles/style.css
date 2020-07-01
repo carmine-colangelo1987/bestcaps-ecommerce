@@ -191,23 +191,47 @@ nav #lblCartCount {
   outline: none;
 }
 
-.trolley-icon {
+.trolley-icon, .reload-icon {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
-.trolley-icon:hover {
+.trolley-icon:hover, .reload-icon:hover {
   background-color: #4c6ca3;
 }
-.trolley-icon:active {
+.trolley-icon:active, .reload-icon:active {
   background-color: #6986B9;
 }
-.trolley-icon .fa-shopping-cart {
+.trolley-icon .fas, .reload-icon .fas {
   color: #ffffff;
   font-size: 1rem;
   padding: 12.7px;
+}
+
+.how-many {
+  max-width: 100%;
+  padding: 20px;
+}
+@media (min-width: 1200px) {
+  .how-many {
+    padding: 14px 20px !important;
+  }
+}
+@media (max-width: 992px) {
+  .how-many {
+    padding: 20px 14px !important;
+  }
+}
+@media (max-width: 768px) {
+  .how-many {
+    padding: 20px !important;
+  }
+}
+
+.reload {
+  width: 70px;
 }
 
 .remove {
