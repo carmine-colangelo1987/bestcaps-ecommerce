@@ -287,7 +287,9 @@ if (!!document.querySelector('.trolley-page')) {
 
 
 
-    //funzione svuota carrello
+    /*----------------------------------------------------
+    funzione che svuota l'intero carrello in local storage
+    ----------------------------------------------------*/
     function empty() {
 
         localStorage.clear();
@@ -304,17 +306,24 @@ if (!!document.querySelector('.trolley-page')) {
         */
     }
 
-    //rimuovere prodotto
+    /*-------------------------------------
+    all'onclick rimuove il singolo prodotto
+    -------------------------------------*/
     function productRemove(x){
-        debugger
+
         let productStored = JSON.parse(localStorage.getItem("cart"))
-        productStored.splice(x, 1);
-        localStorage.setItem(`cart`, JSON.stringify(productStored))
+        if (productStored.length > 1) {
+            productStored.splice(x, 1);
+            localStorage.setItem(`cart`, JSON.stringify(productStored))
+        } else {
+            localStorage.clear();
+        }
         location.reload();
-        //document.querySelector('.cards-trolley').remove();
     }
 
-    //totale da pagare
+    /*--------------------------------------
+    Funzione che calcola il totale da pagare
+    --------------------------------------*/
     if ('cart' in localStorage) {
         let totalPrice = 0
 
