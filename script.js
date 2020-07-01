@@ -58,7 +58,7 @@ function init(object) {
         </div>`
         let listItemQuery = document.querySelector('.list-item');
         if (!!listItemQuery)
-            document.querySelector('.list-item').innerHTML += listItem;
+        document.querySelector('.list-item').innerHTML += listItem;
     }
 }
 
@@ -68,21 +68,19 @@ let numbersProduct = [];
 //array in cui mettere i prodotti selezionati
 let cart = [];
 
-if ("cart" in localStorage) {
+if("cart" in localStorage) {
     cart = JSON.parse(localStorage.getItem("cart"))
 }
 
 function moveToCart(id) {
-    let index = numbersProduct.findIndex(product => product.prodId === id);
-    let prodobj = {};
-    Object.assign(prodobj, numbersProduct[index]);
-
+    let index = numbersProduct.findIndex(product => product.prodId === id);    
+    let prodobj = numbersProduct[index];
     if (cart.length > 0) {
-        let index = cart.findIndex(product => product.prodId === id)
-        if (index >= 0) {
-            cart[index].counter += prodobj.counter
+        let index = cart.findIndex(product => product.prodId === id)        
+        if (index >=0) {
+            cart[index] = prodobj
         } else {
-            cart.push(prodobj)
+            cart.push(probobj)
         }
     } else {
         cart.push(prodobj)
@@ -96,9 +94,9 @@ function moveToCart(id) {
 //funzione che aggiunge +1 al numero totale del prodotto
 function add(id) {
     let index = numbersProduct.findIndex(product => product.prodId === id);
-    let addOne = numbersProduct[index].counter + 1;
-    numbersProduct[index].counter = addOne;
-    document.getElementById(id).setAttribute("value", `${addOne}`);
+    const value = Number(document.getElementById(id).value);
+    numbersProduct[index].counter += 1;
+    document.getElementById(id).value = value + 1;
 }
 
 //funzione che toglie-1 al numero totale del prodotto fino ad arrivare a 0
@@ -123,7 +121,7 @@ function productCard(item) {
         let currentProdId = item[x].nome.replace(/\./g, '').replace(/ /g, '') + item[x].id;
 
         //crea i singoli elmenti dell'array per fare i singoli counter dei prodotti
-        let productObject = { prodId: currentProdId, counter: 0, nome: item[x].nome, prezzo: item[x].prezzo, capsule: item[x].capsule, dose: item[x].dose, rating: item[x].rating };
+        let productObject = { prodId: currentProdId, counter: 0, nome: item[x].nome, prezzo: item[x].prezzo, capsule: item[x].capsule, dose: item[x].dose, rating: item[x].rating};
         numbersProduct.push(productObject)
 
         //crea ogni singola card
@@ -138,10 +136,10 @@ function productCard(item) {
                         <p class="card-text"><small class="text-muted days">Dose giornaliera:  ${item[x].dose}</small></p>
                         <div class="stars">
             
-                ${createStar(item[x].rating)}
-                
-                </div>
-                    <h5 class="card-title price second-color">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n)}</h5>                    
+            ${createStar(item[x].rating)}
+            
+            </div>
+                        <h5 class="card-title price second-color">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n)}</h5>                    
                     </div>
                     <div class="card-footer card-footer-product">
                         <small class="text-left pr-3 pl-1">Aggiungi al carrello</small>
@@ -171,7 +169,7 @@ function productCard(item) {
  * stampa l'input per il contatore dei prodotti
  * @param {*} currentProdId 
  */
-function productCounter(currentProdId, counter = 0) {
+function productCounter(currentProdId, counter = 0){
     return `
     <div class="trolley-quantity fourth-color-bg">
         <input type="number" name="number" min="0" max="1000" value="${counter}" class="trolley-number" id="${currentProdId}">
@@ -179,6 +177,7 @@ function productCounter(currentProdId, counter = 0) {
         <i class="fas fa-minus-square minus third-color" onclick="minus('${currentProdId}')"></i>
     </div>`
 }
+
 
 //funzione che aggiunge le stelle ai singoli prodotti
 function createStar(s) {
@@ -203,12 +202,12 @@ probabilmente andrà inserita all'interno della funzione che verrà richiamata a
 nell'icona
 */
 function sommaNumArt() {
-    let dynamicIcon
+    let dynamicIcon 
     let productStored = JSON.parse(localStorage.getItem("cart"))
+    debugger
     if (productStored.length === 1) {
         dynamicIcon = `${productStored[0].counter}`
     } else {
-
         dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
             return total + num
         })
@@ -222,14 +221,13 @@ function sommaNumArt() {
 
 if (!!document.querySelector('.trolley-page')) {
     //svuota carrello
-    let dynamicIcon
+    let dynamicIcon 
     let productStored = JSON.parse(localStorage.getItem("cart"))
 
     if ('cart' in localStorage) {
-        dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
-            return total + num
-        })
-    } else {
+    dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
+        return total + num
+    })} else {
         dynamicIcon = 0;
     }
 
@@ -248,54 +246,50 @@ if (!!document.querySelector('.trolley-page')) {
     document.querySelector('.main-trolley-container').innerHTML += emptyTrolley;
 
     //prodotti aggiunti --> aggiungere forEach
-    if ('cart' in localStorage) {
-        for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
-            let productStored = JSON.parse(localStorage.getItem("cart"))[i]
-            let n = productStored.prezzo / 1000;
-            let addedProducts = `
-            
-            <div id="${productStored.prodId}" class="card card-trolley mb-3 fourth-color-bg">
-                <div class="trolley-align text-center text-md-left row no-gutters">
-                    <div class="col-md-4">
-                        <img src="imgs/ph-sport.jpg" class="card-img" alt="product">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row no-gutters general-wrapper">
-                            <h6 class="second-color font-weight-bold remove-product p-2" onclick="productRemove('${i}')"><i class="fas fa-times pr-2"></i>Remove</h6>
-                            <div class="trolley-card-body col-md-9">
-                                <div class="card-body">
-                                    <h5 class="card-title first-color">${productStored.nome}</h5>
-                                    <p class="card-text">Questo prodotto è ottimo per allenarsi</p>
-                                    <p class="card-text quantity"><small class="text-muted pills">Quantità: ${productStored.capsule * productStored.counter} capsule</small></p>
-                                    <p class="card-text"><small class="text-muted days">Durata: ${Math.floor((productStored.capsule * productStored.counter) / productStored.dose)} giorni</small></p>
-                                    <h5 class="card-title price second-color m-0">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n * productStored.counter)}</h5>   
-                                </div>                 
-                            </div>
-                            <div class="how-many col-md-1">
-                                <div class="trolley ml-md-0">
-                                    ${productCounter(productStored.prodId, productStored.counter)}
-                                </div>
+    if('cart' in localStorage) { 
+    for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
+    let productStored = JSON.parse(localStorage.getItem("cart"))[i]
+    let n = productStored.prezzo / 1000;
+    let addedProducts = `
+        
+        <div class="card card-trolley mb-3 fourth-color-bg">
+            <div class="trolley-align text-center text-md-left row no-gutters">
+                <div class="col-md-4">
+                    <img src="imgs/ph-sport.jpg" class="card-img" alt="product">
+                </div>
+                <div class="col-md-8">
+                    <div class="row no-gutters general-wrapper">
+                        <h6 class="second-color font-weight-bold remove-product p-2" onclick="productRemove('${i}')"><i class="fas fa-times pr-2"></i>Remove</h6>
+                        <div class="trolley-card-body col-md-9">
+                            <div class="card-body">
+                                <h5 class="card-title first-color">${productStored.nome}</h5>
+                                <p class="card-text">Questo prodotto è ottimo per allenarsi</p>
+                                <p class="card-text quantity"><small class="text-muted pills">Quantità: ${productStored.capsule * productStored.counter} capsule</small></p>
+                                <p class="card-text"><small class="text-muted days">Durata: ${Math.floor((productStored.capsule *productStored.counter) / productStored.dose)} giorni</small></p>
+                                <h5 class="card-title price second-color m-0">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n * productStored.counter)}</h5>   
+                            </div>                 
+                        </div>
+                        <div class="how-many col-md-1">
+                            <div class="trolley ml-md-0">
+                                ${productCounter(productStored.prodId, productStored.counter)}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>`
-
-
-            document.querySelector('.cards-trolley').innerHTML += addedProducts;
-        }
-    }
-
-
+            </div>
+        </div>`
+    
+        document.querySelector('.cards-trolley').innerHTML += addedProducts;
+    }}
 
     //funzione svuota carrello
     function empty() {
-
+        
         localStorage.clear();
         location.reload();
+        
 
-
-
+        
         /*
         document.querySelector('.cards-trolley').innerHTML = '';
         document.querySelector('.num-elements').innerHTML = ' 0 ';
@@ -306,7 +300,7 @@ if (!!document.querySelector('.trolley-page')) {
     }
 
     //rimuovere prodotto
-    function productRemove() {
+    function productRemove(){
         document.querySelector('.cards-trolley').remove();
     }
 
@@ -316,7 +310,7 @@ if (!!document.querySelector('.trolley-page')) {
 
         for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
             let productStored = JSON.parse(localStorage.getItem("cart"))[i]
-            let n = productStored.prezzo / 1000
+            let n = productStored.prezzo/1000
             totalPrice += n * productStored.counter;
         }
 
@@ -344,19 +338,19 @@ if (!!document.querySelector('.trolley-page')) {
         </div>`
         document.querySelector('.main-tot-prices').innerHTML += tot;
     }
+    
 
-
-
+    
     //prezzi prodotti da sommare
-    if ('cart' in localStorage) {
+    if('cart' in localStorage) { 
         for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
             let productStored = JSON.parse(localStorage.getItem("cart"))[i]
             let n = productStored.prezzo / 1000;
             let prices = `
                 <div class="prices d-flex justify-content-between align-items-center">
-                <h7 class="first-color">${productStored.nome}</h7><h7 class="second-color">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n * productStored.counter)}</h7>
+                <h7 class="first-color">${productStored.nome}</h7><h7 class="second-color">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n*productStored.counter)}</h7>
                 </div>`
             document.querySelector('.prices-wrapper').innerHTML += prices;
-        }
+            }
     }
 }
