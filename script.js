@@ -123,7 +123,7 @@ probabilmente andrà inserita all'interno della funzione che verrà richiamata a
 nell'icona
 */
 function sommaNumArt() {
-    let dynamicIcon
+    let dynamicIcon = 0;
     let productStored = JSON.parse(localStorage.getItem("cart"))
     console.log(productStored.length)
     if (productStored.length === 1) {
@@ -133,7 +133,6 @@ function sommaNumArt() {
         dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
             return total + num
         })}
-        else {dynamicIcon = 0}
     }
     console.log(dynamicIcon)
     document.getElementById('lblCartCount').innerHTML = `${dynamicIcon}`;
