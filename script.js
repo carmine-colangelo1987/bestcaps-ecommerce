@@ -232,7 +232,7 @@ if (!!document.querySelector('.trolley-page')) {
     let dynamicIcon
     let productStored = JSON.parse(localStorage.getItem("cart"))
 
-    if ('cart' in localStorage) {
+    if ('cart' in localStorage && localStorage.length > 0) {
     dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
         return total + num
     })} else {
