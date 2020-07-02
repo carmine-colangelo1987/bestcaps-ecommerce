@@ -76,14 +76,16 @@ function moveToCart(id) {
     let index = numbersProduct.findIndex(product => product.prodId === id);
     let prodobj = {};
     Object.assign(prodobj, numbersProduct[index]);
+
     if (cart.length > 0) {
         let index = cart.findIndex(product => product.prodId === id)
-        if (prodobj.counter > 0) {
+        if (prodobj.counter >0) {
         if (index >= 0) {
             cart[index].counter += prodobj.counter
-        } 
-    }      
-    if (prodobj.counter > 0){
+        } else {
+            cart.push(prodobj)
+        }
+    } else {
         cart.push(prodobj)
     }
 }
