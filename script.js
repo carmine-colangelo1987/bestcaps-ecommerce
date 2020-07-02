@@ -21,19 +21,7 @@ let navbar = `
 
 document.querySelector('.navbar').innerHTML = navbar;
 
-/*
-if (ls("cart") && ls("cart").length > 0 ) {
-    
-    let dynamicIcon
-    let productStored = JSON.parse(localStorage.getItem("cart"))
-    dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
-        return total + num
-    })
-    document.getElementById('lblCartCount').innerHTML = `${dynamicIcon}`;
-}*/
-
 //Chiamata
-
 fetch('https://my-json-server.typicode.com/sarhita92/catalogue/db').then(result => {
     console.dir(result)
     if (result.ok) {
@@ -73,11 +61,6 @@ function init() {
     }
     updateBadgeIcon()
 }
-/*
-if ("cart" in localStorage) {
-    cart = JSON.parse(localStorage.getItem("cart"))
-    console.log(cart)
-}*/
 
 /**
  * Manage local storage easy
@@ -101,16 +84,13 @@ function moveToCart(prodId, categoryName, indexOfProduct) {
     console.log(categoryName)
     console.log(indexOfProduct)
     console.log(numbersProduct)
-    debugger
     const product = numbersProduct[categoryName][indexOfProduct];
     let cloneOfCart = ls('cart') || {};
     
     if(cloneOfCart.hasOwnProperty(prodId)){
-        debugger
         cloneOfCart[prodId].counter += value;
         console.log(product)
     } else {
-        debugger
         cloneOfCart[prodId] = {
             ...product,
             counter: value
@@ -121,15 +101,10 @@ function moveToCart(prodId, categoryName, indexOfProduct) {
     console.log(localStorage)
     updateBadgeIcon()
     inputElementWithValue.value = 0;
-    debugger 
 }
 
-/*
-funzione per il numero dei prodotti selezionati da visualizzare sull'icona del carrello
-probabilmente andrà inserita all'interno della funzione che verrà richiamata al click del pulsante
-"aggiungi al carrello" del singolo prodotto, così da aggiornare di volta in volta il numero totale
-nell'icona
-*/
+
+//funzione per il numero dei prodotti selezionati da visualizzare sull'icona del carrello
 function updateBadgeIcon() {
     const cart = ls('cart'); // se c'è un carrello nel local storage, sommo tutti i valori dei vari counter
     let badgeIcon = 0; // valore di default del numerino nel carrello
@@ -247,7 +222,7 @@ if (!!document.querySelector('.trolley-page')) {
 
     document.querySelector('.main-trolley-container').innerHTML += emptyTrolley;
 
-    //prodotti aggiunti --> aggiungere forEach
+    //prodotti aggiunti
     if ('cart' in localStorage) {
         for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
             let productStored = JSON.parse(localStorage.getItem("cart"))[i]
@@ -286,10 +261,8 @@ if (!!document.querySelector('.trolley-page')) {
         }
     }
 
-
-
     /*----------------------------------------------------
-    funzione che svuota l'intero carrello in local storage
+    Funzione che svuota l'intero carrello in local storage
     ----------------------------------------------------*/
     function empty() {
 
@@ -298,7 +271,7 @@ if (!!document.querySelector('.trolley-page')) {
     }
 
     /*-------------------------------------
-    all'onclick rimuove il singolo prodotto
+    All'onclick rimuove il singolo prodotto
     -------------------------------------*/
     function productRemove(x){
 
@@ -349,9 +322,9 @@ if (!!document.querySelector('.trolley-page')) {
         document.querySelector('.main-tot-prices').innerHTML += tot;
     }
 
-
-
-    //prezzi prodotti da sommare
+    /*--------------------------------------
+    Prezzi prodotti da sommare
+    --------------------------------------*/
     if ('cart' in localStorage) {
         for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
             let productStored = JSON.parse(localStorage.getItem("cart"))[i]
