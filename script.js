@@ -239,7 +239,7 @@ function modal(){
                 </button>
             </div>
             <div class="modal-body">
-                <p>Stai per eliminare un prodotto dal carrello. <br> <br>
+                <p>Stai per eliminare un prodotto dal carrello. <br><br><br><br>
                 e se poi te ne penti?</p>
             </div>
             <div class="modal-footer" id="modalId">
