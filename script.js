@@ -78,13 +78,15 @@ function moveToCart(id) {
     Object.assign(prodobj, numbersProduct[index]);
     if (cart.length > 0) {
         let index = cart.findIndex(product => product.prodId === id)
-        if (index > 0) {
+        if (prodobj.counter > 0) {
+        if (index >= 0) {
             cart[index].counter += prodobj.counter
         } 
     }      
     if (prodobj.counter > 0){
         cart.push(prodobj)
     }
+}
     console.log(cart)
     localStorage.setItem(`cart`, JSON.stringify(cart));
     console.log(localStorage.cart)
