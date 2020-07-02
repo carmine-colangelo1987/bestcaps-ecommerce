@@ -125,12 +125,15 @@ nell'icona
 function sommaNumArt() {
     let dynamicIcon
     let productStored = JSON.parse(localStorage.getItem("cart"))
+    console.log(productStored.length)
     if (productStored.length === 1) {
         dynamicIcon = `${productStored[0].counter}`
     } else {
+        if ('cart' in localStorage && productStored.length > 0){
         dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
             return total + num
-        })
+        })}
+        else {dynamicIcon = 0}
     }
     console.log(dynamicIcon)
     document.getElementById('lblCartCount').innerHTML = `${dynamicIcon}`;
@@ -231,7 +234,7 @@ if (!!document.querySelector('.trolley-page')) {
     let dynamicIcon
     let productStored = JSON.parse(localStorage.getItem("cart"))
 
-    if ('cart' in localStorage && localStorage.length > 1) {
+    if ('cart' in localStorage && productStored.length > 0) {
     dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
         return total + num
     })} else {
