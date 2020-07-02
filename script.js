@@ -128,10 +128,9 @@ function sommaNumArt() {
     if (productStored.length === 1) {
         dynamicIcon = `${productStored[0].counter}`
     } else {
-        if ('cart' in localStorage && localStorage.length > 1 {
         dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
             return total + num
-        })}
+        })
     }
     console.log(dynamicIcon)
     document.getElementById('lblCartCount').innerHTML = `${dynamicIcon}`;
