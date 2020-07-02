@@ -1,3 +1,9 @@
+//crea un oggetto composto dal json
+let numbersProduct = {};
+
+//oggetto in cui mettere i prodotti selezionati
+let cart = {};
+
 //Navbar
 let navbar = `
     <a class="navbar-brand" href="index.html">
@@ -8,22 +14,23 @@ let navbar = `
         <a href="#" class="nav-item nav-link px-2"><i class="fas fa-heart fifth-color"></i></a>
         <a href="trolley.html" class="nav-item nav-link px-2">
             <i class="fas fa-shopping-cart fifth-color"></i>
-            <span class="badge badge-warning" id="lblCartCount">0</span>
+            <span class="badge badge-warning" id="badgeIcon">0</span>
         </a>
     </div>
     `
 
 document.querySelector('.navbar').innerHTML = navbar;
 
-
-if (JSON.parse(localStorage.getItem("cart")) && JSON.parse(localStorage.getItem("cart")).length > 0 ) {
+/*
+if (ls("cart") && ls("cart").length > 0 ) {
+    
     let dynamicIcon
     let productStored = JSON.parse(localStorage.getItem("cart"))
     dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
         return total + num
     })
     document.getElementById('lblCartCount').innerHTML = `${dynamicIcon}`;
-}
+}*/
 
 //Chiamata
 
@@ -40,80 +47,81 @@ fetch('https://my-json-server.typicode.com/sarhita92/catalogue/db').then(result 
     }
 }).then(json => {
     console.log(json);
-    init(json);
+    numbersProduct = json;
+    init();
 
 }).catch(err => {
     console.log(err);
 });
 
-function init(object) {
-    Object.keys(object).forEach(item => createListName(item));
+function init() {
+    Object.keys(numbersProduct).forEach(category => {
+        createListName(category)
+    });
+
     function createListName(item) {
         let listItem = `
         <div class="category mt-5 text-center"><span class="line first-color-bg"></span><h3 class="first-color">${item}</h3><span class="line first-color-bg"></span></div>
         <div id="${item}" class="cards-wrapper row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
         
-        ${productCard(Object.values(object[item]))}
+        ${productCard(item)}
         
         </div>`
         let listItemQuery = document.querySelector('.list-item');
         if (!!listItemQuery)
             document.querySelector('.list-item').innerHTML += listItem;
     }
+    updateBadgeIcon()
 }
-
-//crea un array composto dal numero totale dei singoli prodotti
-let numbersProduct = [];
-
-//array in cui mettere i prodotti selezionati
-let cart = [];
-
+/*
 if ("cart" in localStorage) {
     cart = JSON.parse(localStorage.getItem("cart"))
-}
-
-function moveToCart(id) {
-    let index = numbersProduct.findIndex(product => product.prodId === id);
-    let prodobj = {};
-    Object.assign(prodobj, numbersProduct[index]);
-    
-    if (cart.length > 0) {
-        let index = cart.findIndex(product => product.prodId === id)
-        if (index >= 0) {
-            cart[index].counter += prodobj.counter
-        } else {
-            if (prodobj.counter > 0) {
-            cart.push(prodobj)
-            }
-        }
-    } else {
-        if (prodobj.counter > 0) {
-        cart.push(prodobj)
-        }
-    }
-
     console.log(cart)
-    localStorage.setItem(`cart`, JSON.stringify(cart));
-    console.log(localStorage.cart)
-    sommaNumArt()
+}*/
+
+/**
+ * Manage local storage easy
+ * se passi due argomenti, setti. se passi solo il primo argomento, recuperi!
+ * @param {*} key 
+ * @param {*} value 
+ */
+function ls(key, value = null) {
+    if (value) {
+        localStorage.setItem(key, JSON.stringify(value));
+    } else {
+        debugger
+        const result = localStorage.getItem(key);
+        return result ? JSON.parse(result) : result
+    } 
 }
 
-//funzione che aggiunge +1 al numero totale del prodotto
-function add(id) {
-    let index = numbersProduct.findIndex(product => product.prodId === id);
-    const value = Number(document.getElementById(id).value);
-    numbersProduct[index].counter += 1;
-    document.getElementById(id).value = value + 1;
-}
-
-//funzione che toglie-1 al numero totale del prodotto fino ad arrivare a 0
-function minus(id) {
-    let index = numbersProduct.findIndex(product => product.prodId === id);
-    if (numbersProduct[index].counter > 0) {
-        const value = Number(document.getElementById(id).value);
-        numbersProduct[index].counter += -1;
-        document.getElementById(id).value = value - 1;
-    }
+function moveToCart(prodId, categoryName, indexOfProduct) {
+    const inputElementWithValue = document.getElementById(prodId)
+    const value = Number(inputElementWithValue.value);
+    console.log(categoryName)
+    console.log(indexOfProduct)
+    console.log(numbersProduct)
+    debugger
+    const product = numbersProduct[categoryName][indexOfProduct];
+    let cloneOfCart = ls('cart') || {};
+    
+    if(cloneOfCart.hasOwnProperty(prodId)){
+        debugger
+        cloneOfCart[prodId].counter += value;
+        console.log(product)
+    } else {
+        debugger
+        cloneOfCart[prodId] = {
+            ...product,
+            counter: value
+        }
+    } 
+    
+    ls('cart', cloneOfCart);
+    console.log(localStorage)
+    updateBadgeIcon()
+    inputElementWithValue.value = 0;
+    debugger 
 }
 
 /*
@@ -122,36 +130,40 @@ probabilmente andrà inserita all'interno della funzione che verrà richiamata a
 "aggiungi al carrello" del singolo prodotto, così da aggiornare di volta in volta il numero totale
 nell'icona
 */
-function sommaNumArt() {
-    let dynamicIcon = 0;
-    let productStored = JSON.parse(localStorage.getItem("cart"))
-    console.log(productStored.length)
-    if (productStored.length === 1) {
-        dynamicIcon = `${productStored[0].counter}`
-    } else {
-        if ('cart' in localStorage && productStored.length > 0){
-        dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
-            return total + num
-        })}
+function updateBadgeIcon() {
+    const cart = ls('cart'); // se c'è un carrello nel local storage, sommo tutti i valori dei vari counter
+    let badgeIcon = 0; // valore di default del numerino nel carrello
+
+    if(cart) {
+        badgeIcon = Object.values(cart)
+            .map(productInCart => productInCart.counter) // a noi serve un array di numeri non di oggetti
+            .reduce((total, num) => total + num) // a noi serve un array di numeri non di oggetti
     }
-    console.log(dynamicIcon)
-    document.getElementById('lblCartCount').innerHTML = `${dynamicIcon}`;
+
+    document.getElementById('badgeIcon').innerHTML = badgeIcon;
 }
 
-function productCard(item) {
-    let x
-    let productCard = ''
+//funzione che aggiunge +1 al numero totale del prodotto
+function add(id) {
+    const value = Number(document.getElementById(id).value);
+    document.getElementById(id).value = value + 1;
+}
 
-    for (x = 0; x < Object.values(item).length; x++) {
+//funzione che toglie-1 al numero totale del prodotto fino ad arrivare a 0
+function minus(id) {
+    const value = Number(document.getElementById(id).value);
+    document.getElementById(id).value = value - 1;
+}
+
+function productCard(itemKey) {
+    let productCard = ''
+    const listOfProducts = numbersProduct[itemKey];
+    listOfProducts.forEach( (product, indexOfArray) => {
         //formatta il prezzo json in un formato utile
-        let n = item[x].prezzo / 1000;
+        const n = product.prezzo / 1000;
 
         //crea un id univoco per ogni singolo prodotto
-        let currentProdId = item[x].nome.replace(/\./g, '').replace(/ /g, '') + item[x].id;
-
-        //crea i singoli elmenti dell'array per fare i singoli counter dei prodotti
-        let productObject = { prodId: currentProdId, counter: 0, nome: item[x].nome, prezzo: item[x].prezzo, capsule: item[x].capsule, dose: item[x].dose, rating: item[x].rating };
-        numbersProduct.push(productObject)
+        const currentProdId = product.nome.replace(/\./g, '').replace(/ /g, '') + product.id;
 
         //crea ogni singola card
         productCard += `        
@@ -159,39 +171,30 @@ function productCard(item) {
                 <div class="card">
                     <img src="imgs/ph-sport.jpg" class="card-img-top product-image" alt="ph-sport pills">
                     <div class="card-body">
-                        <h5 class="card-title title mt-4 first-color">${item[x].nome}</h5>
+                        <h5 class="card-title title mt-4 first-color">${product.nome}</h5>
                         <p class="card-text text">Questo prodotto è ottimo per allenarsi</p>
-                        <p class="card-text quantity"><small class="text-muted pills">Quantità: ${item[x].capsule} capsule</small></p>
-                        <p class="card-text"><small class="text-muted days">Dose giornaliera:  ${item[x].dose}</small></p>
+                        <p class="card-text quantity"><small class="text-muted pills">Quantità: ${product.capsule} capsule</small></p>
+                        <p class="card-text"><small class="text-muted days">Dose giornaliera:  ${product.dose}</small></p>
                         <div class="stars">
-            
-                ${createStar(item[x].rating)}
-                
-                </div>
-                    <h5 class="card-title price second-color">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n)}</h5>                    
+                            ${createStar(product.rating)}
+                        </div>
+                        <h5 class="card-title price second-color">
+                            ${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n)}
+                        </h5>                    
                     </div>
                     <div class="card-footer card-footer-product">
                         <small class="text-left pr-3 pl-1">Aggiungi al carrello</small>
                         <div class="trolley ml-md-0">
-
                             ${productCounter(currentProdId)}
-                            <div class="trolley-icon second-color-bg"><i class="fas fa-shopping-cart" aria-hidden="true" onclick="moveToCart('${currentProdId}')"></i></div>
-
+                            <div class="trolley-icon second-color-bg"><i class="fas fa-shopping-cart" aria-hidden="true" onclick="moveToCart('${currentProdId}', '${itemKey}', '${indexOfArray}')"></i></div>
                         </div>
                     </div>
                 </div>
             </div>
         `
-    }
-    return productCard;
-
-    /*
-                            onclick="this.parentNode.querySelector('[type=number]').stepUp();"
-                            onclick="this.parentNode.querySelector('[type=number]').stepDown();"
-                            <div class="trolley-number d-flex align-items-center justify-content-center" id="${currentProdId}"></div>
-                            <div class="trolley-add"><i class="fas fa-plus-square" onclick="add('`+currentProdId+`')"></i><i class="fas fa-minus-square" onclick="minus('`+currentProdId+`')"></i></div>
-                            <div class="trolley-icon"><i class="fas fa-shopping-cart" aria-hidden="true" onclick="moveToCart('`+currentProdId+`')"></i></div>
-    */
+    })
+    
+    return productCard; 
 }
 
 /**
@@ -201,7 +204,7 @@ function productCard(item) {
 function productCounter(currentProdId, counter = 0) {
     return `
     <div class="trolley-quantity fourth-color-bg">
-        <input type="number" name="number" min="0" max="1000" oninput="moveToCart(${currentProdId})" value="${counter}" class="trolley-number" id="${currentProdId}">
+        <input type="number" name="number" min="0" max="1000" value="${counter}" class="trolley-number" id="${currentProdId}">
         <i class="fas fa-plus-square plus third-color"  onclick="add('${currentProdId}')" ></i>
         <i class="fas fa-minus-square minus third-color" onclick="minus('${currentProdId}')"></i>
     </div>`
@@ -215,16 +218,6 @@ function createStar(s) {
     }
     return star;
 }
-
-/*array in cui mettere i prodotti selezionati
-let productSelected = ['prova', 'prova']
-
-function productNumber() {
-    document.getElementById('lblCartCount').innerHTML = `${productSelected.length}`;
-}*/
-
-
-
 
 //Carrello
 
@@ -289,7 +282,6 @@ if (!!document.querySelector('.trolley-page')) {
                 </div>
             </div>`
 
-
             document.querySelector('.cards-trolley').innerHTML += addedProducts;
         }
     }
@@ -303,16 +295,6 @@ if (!!document.querySelector('.trolley-page')) {
 
         localStorage.clear();
         location.reload();
-
-
-
-        /*
-        document.querySelector('.cards-trolley').innerHTML = '';
-        document.querySelector('.num-elements').innerHTML = ' 0 ';
-        document.querySelector('.prices-wrapper').innerHTML = '';
-        document.querySelector('.tot-to-pay').innerHTML = '0 €';
-        document.querySelector('.remove').innerHTML = '';
-        */
     }
 
     /*-------------------------------------

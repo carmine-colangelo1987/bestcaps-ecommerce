@@ -61,23 +61,19 @@ nav .fas {
   }
 }
 nav .badge {
-  padding-left: 9px;
-  padding-right: 9px;
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   border-radius: 9px;
+  font-size: 12px;
+  background: #04A6B4;
+  color: #ffffff;
+  padding: 3px 9px;
+  vertical-align: top;
+  margin-left: -8px;
 }
 nav .label-warning[href],
 nav .badge-warning[href] {
   background-color: #132E52;
-}
-nav #lblCartCount {
-  font-size: 12px;
-  background: #04A6B4;
-  color: #ffffff;
-  padding: 0 5px;
-  vertical-align: top;
-  margin-left: -10px;
 }
 
 .category {
