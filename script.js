@@ -225,12 +225,55 @@ function productNumber() {
 }*/
 
 
+/*----------------------------------------
+|funzione che crea una modale di conferma|
+----------------------------------------*/
+function modal(){
+    return `
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Ehi! Presta MOLTA attenzione!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Stai per eliminare un prodotto dal carrello. <br> <br>
+                e se poi te ne penti?</p>
+            </div>
+            <div class="modal-footer" id="modalId">
+                
+            </div>
+            </div>
+        </div>
+        </div>
+    `
+}
 
+/*----------------------------------------
+|funzione che crea i bottoni della modale|
+----------------------------------------*/
+function modalButton(i) {
+    debugger
 
-//Carrello
+    let buttons = `
+                <button type="button" class="btn btn-primary" onclick="productRemove('${i}')">Voglio rischiare! Rimuovilo!</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">...hai ragione!</button>
+    `
 
+    document.getElementById('modalId').innerHTML = buttons;
+}
+
+/*------------------------------------
+|if che crea tutta la pagina carrello|
+------------------------------------*/
 if (!!document.querySelector('.trolley-page')) {
-    //svuota carrello
+
+    /*------------------------------------------------------------------
+    |se la pagina è trolley.html imposta la struttura html del carrello|
+    ------------------------------------------------------------------*/
     let dynamicIcon
     let productStored = JSON.parse(localStorage.getItem("cart"))
 
@@ -242,15 +285,16 @@ if (!!document.querySelector('.trolley-page')) {
     }
 
     let emptyTrolley = `
+        
+        ${modal()}
+    
         <div class="first-card-trolley card card-trolley mb-3 fourth-color-bg">
             <div class="delete-products p-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
                 <h6 class="elements third-color m-md-0 mb-4 text-center text-md-left">Sono presenti<span class="num-elements"> ${dynamicIcon} </span>articoli nel carrello</h6>
                 <h6 class="remove first-color m-0 text-right font-weight-bold" onclick="empty()"><i class="fas fa-times pr-2"></i>Svuota carrello</h6>
             </div>
         </div>
-        
-        <div class="cards-trolley">        
-        
+        <div class="cards-trolley">
         </div>`
 
     document.querySelector('.main-trolley-container').innerHTML += emptyTrolley;
@@ -260,6 +304,10 @@ if (!!document.querySelector('.trolley-page')) {
         for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
             let productStored = JSON.parse(localStorage.getItem("cart"))[i]
             let n = productStored.prezzo / 1000;
+
+            //<h6 class="second-color font-weight-bold remove-product p-2" onclick="productRemove('${i}')"><i class="fas fa-times pr-2"></i>Remove</h6>
+
+
             let addedProducts = `
             
             <div id="${productStored.prodId}" class="card card-trolley mb-3 fourth-color-bg">
@@ -269,7 +317,7 @@ if (!!document.querySelector('.trolley-page')) {
                     </div>
                     <div class="col-md-8">
                         <div class="row no-gutters general-wrapper">
-                            <h6 class="second-color font-weight-bold remove-product p-2" onclick="productRemove('${i}')"><i class="fas fa-times pr-2"></i>Remove</h6>
+                            <h6 class="second-color font-weight-bold remove-product p-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="modalButton('${i}')"><i class="fas fa-times pr-2"></i>Remove</h6>
                             <div class="trolley-card-body col-md-9">
                                 <div class="card-body">
                                     <h5 class="card-title first-color">${productStored.nome}</h5>
@@ -297,28 +345,17 @@ if (!!document.querySelector('.trolley-page')) {
 
 
 
-    /*----------------------------------------------------
-    funzione che svuota l'intero carrello in local storage
-    ----------------------------------------------------*/
+    /*------------------------------------------------------
+    |funzione che svuota l'intero carrello in local storage|
+    ------------------------------------------------------*/
     function empty() {
-
         localStorage.clear();
         location.reload();
-
-
-
-        /*
-        document.querySelector('.cards-trolley').innerHTML = '';
-        document.querySelector('.num-elements').innerHTML = ' 0 ';
-        document.querySelector('.prices-wrapper').innerHTML = '';
-        document.querySelector('.tot-to-pay').innerHTML = '0 €';
-        document.querySelector('.remove').innerHTML = '';
-        */
     }
 
-    /*-------------------------------------
-    all'onclick rimuove il singolo prodotto
-    -------------------------------------*/
+    /*---------------------------------------
+    |all'onclick rimuove il singolo prodotto|
+    ---------------------------------------*/
     function productRemove(x){
 
         let productStored = JSON.parse(localStorage.getItem("cart"))
@@ -331,9 +368,9 @@ if (!!document.querySelector('.trolley-page')) {
         location.reload();
     }
 
-    /*--------------------------------------
-    Funzione che calcola il totale da pagare
-    --------------------------------------*/
+    /*----------------------------------------
+    |funzione che calcola il totale da pagare|
+    ----------------------------------------*/
     if ('cart' in localStorage) {
         let totalPrice = 0
 
