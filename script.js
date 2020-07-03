@@ -80,7 +80,6 @@ function ls(key, value = null) {
 function moveToCart(prodId, categoryName, indexOfProduct) {
     const inputElementWithValue = document.getElementById(prodId)
     const value = Number(inputElementWithValue.value);
-    debugger
     console.log(categoryName)
     console.log(indexOfProduct)
     console.log(numbersProduct)
