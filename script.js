@@ -103,6 +103,35 @@ function moveToCart(prodId, categoryName, indexOfProduct) {
     inputElementWithValue.value = 0;
 }
 
+function refreshToCart(prodId, categoryName, indexOfProduct) {
+    debugger
+    const inputElementWithValue = document.getElementById(prodId)
+    const value = Number(inputElementWithValue.value);
+    var localcart = ls('cart').prodId;
+
+    console.log(categoryName)
+    console.log(indexOfProduct)
+    console.log(localcart)
+    const product = localcart;
+    let cloneOfCart = ls('cart') || {};
+    
+    if(cloneOfCart.hasOwnProperty(prodId)){
+        cloneOfCart[prodId].counter = value;
+        console.log(product)
+    } else {
+        cloneOfCart[prodId] = {
+            ...product,
+            counter: value
+        }
+    }     
+    if(cloneOfCart[prodId].counter > 0){        
+        ls('cart', cloneOfCart);
+    }
+    console.log(localStorage)
+    updateBadgeIcon()
+    location.reload();
+}
+
 
 //funzione per il numero dei prodotti selezionati da visualizzare sull'icona del carrello
 function updateBadgeIcon() {
@@ -292,7 +321,10 @@ if (!!document.querySelector('.trolley-page')) {
             let n = product.prezzo / 1000;
             
             const currentProdId = getProdId(product);
-
+            let itemKey = Object.keys(ls('cart'))
+            let indexOfArray = Object.keys(ls('cart'))[i]
+            let trueIndexOfArray = itemKey.indexOf(`${indexOfArray}`);
+            
             //<h6 class="second-color font-weight-bold remove-product p-2" onclick="productRemove('${i}')"><i class="fas fa-times pr-2"></i>Remove</h6>
 
 
@@ -318,7 +350,7 @@ if (!!document.querySelector('.trolley-page')) {
                             <div class="how-many col-md-1">
                                 <div class="reload ml-md-0">
                                     ${productCounter(currentProdId, product.counter)}
-                                    <div class="reload-icon second-color-bg"><i class="fas fa-redo-alt" aria-hidden="true" onclick="refreshCart('${currentProdId}')"></i></div>
+                                    <div class="reload-icon second-color-bg"><i class="fas fa-redo-alt" aria-hidden="true" onclick="refreshToCart('${currentProdId}', '${itemKey}', '${trueIndexOfArray}')"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -329,6 +361,8 @@ if (!!document.querySelector('.trolley-page')) {
             document.querySelector('.cards-trolley').innerHTML += addedProducts;
         }
     }
+
+
 
     /*----------------------------------------------------
     Funzione che svuota l'intero carrello in local storage
@@ -342,6 +376,7 @@ if (!!document.querySelector('.trolley-page')) {
     |All'onclick rimuove il singolo prodotto|
     ---------------------------------------*/
     function productRemove(x){
+        debugger
         var localcart = ls('cart');
         Object.keys(localcart).forEach(function (prodcutId, i) {
             if (i == x) {
