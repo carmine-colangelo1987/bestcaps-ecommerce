@@ -140,7 +140,7 @@ function productCard(itemKey) {
         const n = product.prezzo / 1000;
 
         //crea un id univoco per ogni singolo prodotto
-        const currentProdId = product.nome.replace(/\./g, '').replace(/ /g, '') + product.id;
+        const currentProdId = getProdId(product);
 
         //crea ogni singola card
         productCard += `        
@@ -242,8 +242,8 @@ function modalButton(i) {
  * @param {*} productStored
  * @returns nome dell'item + id dell'item 
  */
-function getProdId(productStored) {
-    return productStored.nome.replace(/\./g, '').replace(/ /g, '') + productStored.id;
+function getProdId(product) {
+    return product.nome.replace(/\./g, '').replace(/ /g, '') + product.id;
 }
 
 //Carrello
@@ -288,10 +288,10 @@ if (!!document.querySelector('.trolley-page')) {
     if ('cart' in localStorage) {
 
         for (i = 0; i < Object.keys(ls('cart')).length; i++) {
-            let productStored = Object.values(ls('cart'))[i]
-            let n = productStored.prezzo / 1000;
+            let product = Object.values(ls('cart'))[i]
+            let n = product.prezzo / 1000;
             
-            const currentProdId = getProdId(productStored);
+            const currentProdId = getProdId(product);
 
             //<h6 class="second-color font-weight-bold remove-product p-2" onclick="productRemove('${i}')"><i class="fas fa-times pr-2"></i>Remove</h6>
 
@@ -308,16 +308,16 @@ if (!!document.querySelector('.trolley-page')) {
                             <h6 class="second-color font-weight-bold remove-product p-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="modalButton('${i}')"><i class="fas fa-times pr-2"></i>Remove</h6>
                             <div class="trolley-card-body col-md-9">
                                 <div class="card-body">
-                                    <h5 class="card-title first-color">${productStored.nome}</h5>
+                                    <h5 class="card-title first-color">${product.nome}</h5>
                                     <p class="card-text">Questo prodotto è ottimo per allenarsi</p>
-                                    <p class="card-text quantity"><small class="text-muted pills">Quantità: ${productStored.capsule * productStored.counter} capsule</small></p>
-                                    <p class="card-text"><small class="text-muted days">Durata: ${Math.floor((productStored.capsule * productStored.counter) / productStored.dose)} giorni</small></p>
-                                    <h5 class="card-title price second-color m-0">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n * productStored.counter)}</h5>   
+                                    <p class="card-text quantity"><small class="text-muted pills">Quantità: ${product.capsule * product.counter} capsule</small></p>
+                                    <p class="card-text"><small class="text-muted days">Durata: ${Math.floor((product.capsule * product.counter) / product.dose)} giorni</small></p>
+                                    <h5 class="card-title price second-color m-0">${new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(n * product.counter)}</h5>   
                                 </div>                 
                             </div>
                             <div class="how-many col-md-1">
                                 <div class="reload ml-md-0">
-                                    ${productCounter(currentProdId, productStored.counter)}
+                                    ${productCounter(currentProdId, product.counter)}
                                     <div class="reload-icon second-color-bg"><i class="fas fa-redo-alt" aria-hidden="true" onclick="refreshCart('${currentProdId}')"></i></div>
                                 </div>
                             </div>
