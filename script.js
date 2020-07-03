@@ -119,6 +119,7 @@ function updateBadgeIcon() {
 
 //funzione che aggiunge +1 al numero totale del prodotto
 function add(id) {
+    debugger
     const value = Number(document.getElementById(id).value);
     document.getElementById(id).value = value + 1;
 }
@@ -234,6 +235,15 @@ function modalButton(i) {
     document.getElementById('modalId').innerHTML = buttons;
 }
 
+/**
+ * funzione che crea un id prodotto univoco
+ * @param {*} productStored
+ * @returns nome dell'item + id dell'item 
+ */
+function getProdId(productStored) {
+    return productStored.nome.replace(/\./g, '').replace(/ /g, '') + productStored.id;
+}
+
 //Carrello
 
 /*------------------------------------
@@ -244,15 +254,19 @@ if (!!document.querySelector('.trolley-page')) {
     /*------------------------------------------------------------------
     |se la pagina è trolley.html imposta la struttura html del carrello|
     ------------------------------------------------------------------*/
-    let dynamicIcon
-    let productStored = JSON.parse(localStorage.getItem("cart"))
+    let dynamicIcon = 0
+    if('cart' in localStorage){
+    let productStoredLength = Object.keys(ls('cart')).length
+    let productStored = Object.values(ls('cart'))
 
-    if ('cart' in localStorage && productStored.length > 0) {
+    if ('cart' in localStorage && productStoredLength > 0) {
+        debugger
     dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
         return total + num
     })} else {
         dynamicIcon = 0;
     }
+}
 
     let emptyTrolley = `
         
@@ -272,17 +286,18 @@ if (!!document.querySelector('.trolley-page')) {
     //prodotti aggiunti
     if ('cart' in localStorage) {
 
-        for (i = 0; i < Object.keys(JSON.parse(localStorage.getItem("cart"))).length; i++) {
-            let productStored = Object.values(JSON.parse(localStorage.getItem("cart")))[i]
+        for (i = 0; i < Object.keys(ls('cart')).length; i++) {
+            let productStored = Object.values(ls('cart'))[i]
             let n = productStored.prezzo / 1000;
-            const currentProdId = productStored.nome.replace(/\./g, '').replace(/ /g, '') + productStored.id;
+            
+            const currentProdId = getProdId(productStored);
 
             //<h6 class="second-color font-weight-bold remove-product p-2" onclick="productRemove('${i}')"><i class="fas fa-times pr-2"></i>Remove</h6>
 
 
             let addedProducts = `
             
-            <div id="${currentProdId}" class="card card-trolley mb-3 fourth-color-bg">
+            <div class="card card-trolley mb-3 fourth-color-bg">
                 <div class="trolley-align text-center text-md-left row no-gutters">
                     <div class="col-md-4">
                         <img src="imgs/ph-sport.jpg" class="card-img" alt="product">
@@ -301,8 +316,8 @@ if (!!document.querySelector('.trolley-page')) {
                             </div>
                             <div class="how-many col-md-1">
                                 <div class="reload ml-md-0">
-                                    ${productCounter(productStored.prodId, productStored.counter)}
-                                    <div class="reload-icon second-color-bg"><i class="fas fa-redo-alt" aria-hidden="true" onclick="moveToCart('${productStored.prodId}')"></i></div>
+                                    ${productCounter(currentProdId, productStored.counter)}
+                                    <div class="reload-icon second-color-bg"><i class="fas fa-redo-alt" aria-hidden="true" onclick="refreshCart('${currentProdId}')"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -322,18 +337,24 @@ if (!!document.querySelector('.trolley-page')) {
         location.reload();
     }
 
-    /*-------------------------------------
-    All'onclick rimuove il singolo prodotto
-    -------------------------------------*/
+    /*---------------------------------------
+    |All'onclick rimuove il singolo prodotto|
+    ---------------------------------------*/
     function productRemove(x){
+        debugger
+        var localcart = ls('cart');
+        Object.keys(localcart).forEach(function (prodcutId, i) {
+            if (i == x) {
+                delete localcart[prodcutId]
+            }
+        }) 
 
-        let productStored = Object.values(JSON.parse(localStorage.getItem("cart")))
-        if (productStored.length > 1) {
-            productStored.splice(x, 1);
-            localStorage.setItem(`cart`, JSON.stringify(productStored))
-        } else {
+        if(Object.keys(localcart).length === 0){
             localStorage.clear();
+        } else {
+            ls('cart', localcart);
         }
+
         location.reload();
     }
 
@@ -343,8 +364,9 @@ if (!!document.querySelector('.trolley-page')) {
     if ('cart' in localStorage) {
         let totalPrice = 0
 
-        for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
-            let productStored = JSON.parse(localStorage.getItem("cart"))[i]
+        for (i = 0; i < Object.keys(ls('cart')).length; i++) {
+            debugger
+            let productStored = Object.values(ls('cart'))[i]
             let n = productStored.prezzo / 1000
             totalPrice += n * productStored.counter;
         }
@@ -378,8 +400,8 @@ if (!!document.querySelector('.trolley-page')) {
     Prezzi prodotti da sommare
     --------------------------------------*/
     if ('cart' in localStorage) {
-        for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
-            let productStored = JSON.parse(localStorage.getItem("cart"))[i]
+        for (i = 0; i < Object.keys(ls('cart')).length; i++) {
+            let productStored = Object.values(ls('cart'))[i]
             let n = productStored.prezzo / 1000;
             let prices = `
                 <div class="prices d-flex justify-content-between align-items-center">
