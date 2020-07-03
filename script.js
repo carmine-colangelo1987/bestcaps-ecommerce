@@ -72,7 +72,6 @@ function ls(key, value = null) {
     if (value) {
         localStorage.setItem(key, JSON.stringify(value));
     } else {
-        debugger
         const result = localStorage.getItem(key);
         return result ? JSON.parse(result) : result
     } 
@@ -226,7 +225,6 @@ function modal(){
 |funzione che crea i bottoni della modale|
 ----------------------------------------*/
 function modalButton(i) {
-    debugger
 
     let buttons = `
                 <button type="button" class="btn btn-primary" onclick="productRemove('${i}')">Voglio rischiare! Rimuovilo!</button>
@@ -273,16 +271,18 @@ if (!!document.querySelector('.trolley-page')) {
 
     //prodotti aggiunti
     if ('cart' in localStorage) {
-        for (i = 0; i < JSON.parse(localStorage.getItem("cart")).length; i++) {
-            let productStored = JSON.parse(localStorage.getItem("cart"))[i]
+
+        for (i = 0; i < Object.keys(JSON.parse(localStorage.getItem("cart"))).length; i++) {
+            let productStored = Object.values(JSON.parse(localStorage.getItem("cart")))[i]
             let n = productStored.prezzo / 1000;
+            const currentProdId = productStored.nome.replace(/\./g, '').replace(/ /g, '') + productStored.id;
 
             //<h6 class="second-color font-weight-bold remove-product p-2" onclick="productRemove('${i}')"><i class="fas fa-times pr-2"></i>Remove</h6>
 
 
             let addedProducts = `
             
-            <div id="${productStored.prodId}" class="card card-trolley mb-3 fourth-color-bg">
+            <div id="${currentProdId}" class="card card-trolley mb-3 fourth-color-bg">
                 <div class="trolley-align text-center text-md-left row no-gutters">
                     <div class="col-md-4">
                         <img src="imgs/ph-sport.jpg" class="card-img" alt="product">
@@ -321,12 +321,13 @@ if (!!document.querySelector('.trolley-page')) {
         localStorage.clear();
         location.reload();
     }
+
     /*-------------------------------------
     All'onclick rimuove il singolo prodotto
     -------------------------------------*/
     function productRemove(x){
 
-        let productStored = JSON.parse(localStorage.getItem("cart"))
+        let productStored = Object.values(JSON.parse(localStorage.getItem("cart")))
         if (productStored.length > 1) {
             productStored.splice(x, 1);
             localStorage.setItem(`cart`, JSON.stringify(productStored))
