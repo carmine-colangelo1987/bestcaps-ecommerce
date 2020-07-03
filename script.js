@@ -78,12 +78,42 @@ function ls(key, value = null) {
 }
 
 function moveToCart(prodId, categoryName, indexOfProduct) {
+    const product = numbersProduct[categoryName][indexOfProduct]
+
     const inputElementWithValue = document.getElementById(prodId)
     const value = Number(inputElementWithValue.value);
     console.log(categoryName)
     console.log(indexOfProduct)
     console.log(numbersProduct)
-    const product = numbersProduct[categoryName][indexOfProduct];
+    let cloneOfCart = ls('cart') || {};
+    
+    if(cloneOfCart.hasOwnProperty(prodId)){
+        cloneOfCart[prodId].counter += value;
+        console.log(product)
+    } else {
+        cloneOfCart[prodId] = {
+            ...product,
+            counter: value
+        }
+    }     
+    if(cloneOfCart[prodId].counter > 0){        
+        ls('cart', cloneOfCart);
+    }
+    console.log(localStorage)
+    updateBadgeIcon()  
+
+    inputElementWithValue.value = 0;
+}
+
+function refreshToCart(prodId, categoryName, indexOfProduct) {
+    var localcart = ls('cart').prodId;
+    const product = localcart; 
+
+    const inputElementWithValue = document.getElementById(prodId)
+    const value = Number(inputElementWithValue.value);
+    console.log(categoryName)
+    console.log(indexOfProduct)
+    console.log(numbersProduct)
     let cloneOfCart = ls('cart') || {};
     
     if(cloneOfCart.hasOwnProperty(prodId)){
@@ -100,35 +130,7 @@ function moveToCart(prodId, categoryName, indexOfProduct) {
     }
     console.log(localStorage)
     updateBadgeIcon()
-    inputElementWithValue.value = 0;
-}
 
-function refreshToCart(prodId, categoryName, indexOfProduct) {
-    debugger
-    const inputElementWithValue = document.getElementById(prodId)
-    const value = Number(inputElementWithValue.value);
-    var localcart = ls('cart').prodId;
-
-    console.log(categoryName)
-    console.log(indexOfProduct)
-    console.log(localcart)
-    const product = localcart;
-    let cloneOfCart = ls('cart') || {};
-    
-    if(cloneOfCart.hasOwnProperty(prodId)){
-        cloneOfCart[prodId].counter = value;
-        console.log(product)
-    } else {
-        cloneOfCart[prodId] = {
-            ...product,
-            counter: value
-        }
-    }     
-    if(cloneOfCart[prodId].counter > 0){        
-        ls('cart', cloneOfCart);
-    }
-    console.log(localStorage)
-    updateBadgeIcon()
     location.reload();
 }
 
