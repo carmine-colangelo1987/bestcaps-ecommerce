@@ -70,7 +70,7 @@ function init() {
  */
 function ls(key, value = null) {
     if (value) {
-        localStorage.setItem(key, JSON.stringify(value));
+        localStorage.setItem(key, JSON.stringify(value));       
     } else {
         const result = localStorage.getItem(key);
         return result ? JSON.parse(result) : result
@@ -80,6 +80,7 @@ function ls(key, value = null) {
 function moveToCart(prodId, categoryName, indexOfProduct) {
     const inputElementWithValue = document.getElementById(prodId)
     const value = Number(inputElementWithValue.value);
+    debugger
     console.log(categoryName)
     console.log(indexOfProduct)
     console.log(numbersProduct)
@@ -94,9 +95,10 @@ function moveToCart(prodId, categoryName, indexOfProduct) {
             ...product,
             counter: value
         }
-    } 
-    
-    ls('cart', cloneOfCart);
+    }     
+    if(cloneOfCart[prodId].counter > 0){        
+        ls('cart', cloneOfCart);
+    }
     console.log(localStorage)
     updateBadgeIcon()
     inputElementWithValue.value = 0;
@@ -119,7 +121,6 @@ function updateBadgeIcon() {
 
 //funzione che aggiunge +1 al numero totale del prodotto
 function add(id) {
-    debugger
     const value = Number(document.getElementById(id).value);
     document.getElementById(id).value = value + 1;
 }
@@ -127,7 +128,9 @@ function add(id) {
 //funzione che toglie-1 al numero totale del prodotto fino ad arrivare a 0
 function minus(id) {
     const value = Number(document.getElementById(id).value);
-    document.getElementById(id).value = value - 1;
+    if (value > 0){        
+        document.getElementById(id).value = value - 1;
+    }
 }
 
 function productCard(itemKey) {
@@ -260,8 +263,7 @@ if (!!document.querySelector('.trolley-page')) {
     let productStored = Object.values(ls('cart'))
 
     if ('cart' in localStorage && productStoredLength > 0) {
-        debugger
-    dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
+        dynamicIcon = productStored.map(product => product.counter).reduce((total, num) => {
         return total + num
     })} else {
         dynamicIcon = 0;
@@ -341,7 +343,6 @@ if (!!document.querySelector('.trolley-page')) {
     |All'onclick rimuove il singolo prodotto|
     ---------------------------------------*/
     function productRemove(x){
-        debugger
         var localcart = ls('cart');
         Object.keys(localcart).forEach(function (prodcutId, i) {
             if (i == x) {
@@ -365,7 +366,6 @@ if (!!document.querySelector('.trolley-page')) {
         let totalPrice = 0
 
         for (i = 0; i < Object.keys(ls('cart')).length; i++) {
-            debugger
             let productStored = Object.values(ls('cart'))[i]
             let n = productStored.prezzo / 1000
             totalPrice += n * productStored.counter;
