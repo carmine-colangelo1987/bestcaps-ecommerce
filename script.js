@@ -103,7 +103,6 @@ function moveToCart(prodId, categoryName, indexOfProduct) {
     inputElementWithValue.value = 0;
 }
 
-
 //funzione per il numero dei prodotti selezionati da visualizzare sull'icona del carrello
 function updateBadgeIcon() {
     const cart = ls('cart'); // se c'è un carrello nel local storage, sommo tutti i valori dei vari counter
@@ -138,7 +137,6 @@ function productCard(itemKey) {
     listOfProducts.forEach( (product, indexOfArray) => {
         //formatta il prezzo json in un formato utile
         const n = product.prezzo / 1000;
-
         //crea un id univoco per ogni singolo prodotto
         const currentProdId = getProdId(product);
 
